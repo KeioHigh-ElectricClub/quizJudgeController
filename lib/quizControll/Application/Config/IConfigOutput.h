@@ -1,9 +1,12 @@
 #pragma once
 
+#include "domain/Config/Limit.h"
+
 class IConfigOutput {
+ public:
   IConfigOutput() {}
   virtual ~IConfigOutput() {}
 
-  virtual bool setLimit();
+  virtual bool setLimit(Limit limit);
   virtual bool softReset();
 };
