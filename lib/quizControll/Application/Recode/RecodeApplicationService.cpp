@@ -42,6 +42,7 @@ RecodeModel RecodeApplicationService::getRecode() {
 }
 void RecodeApplicationService::setIsRecoding(bool isRecoding) {
   this->isRecoding = isRecoding;
+  if (this->isRecoding) resultRepository->init();
 }
 bool RecodeApplicationService::getIsRecoding() { return isRecoding; }
 
