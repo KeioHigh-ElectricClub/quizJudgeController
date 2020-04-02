@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 #include "Result.h"
 
 class IResultRepository {
@@ -9,4 +10,5 @@ class IResultRepository {
   virtual ~IResultRepository() {}
 
   virtual bool store(std::unique_ptr<Recode> result);
+  virtual bool init();
 };
