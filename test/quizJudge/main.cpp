@@ -25,7 +25,8 @@ void testSetErratum() {
 }
 
 void testManager() {
-  RecodeApplicationService manager(&judgeOutput);
+  TestRepository repository;
+  RecodeApplicationService manager(&judgeOutput, &repository);
   for (byte i = 0; i < 20; i++) {
     manager.createAnswerRight(i, 4);
     TEST_ASSERT_EQUAL(i, manager.getRecode().getRespondentNum());
@@ -46,7 +47,8 @@ void testManagerWithRepository() {
 }
 
 void testManagerWithoutAnswerRight() {
-  RecodeApplicationService manager(&judgeOutput);
+  TestRepository repository;
+  RecodeApplicationService manager(&judgeOutput, &repository);
 
   TEST_ASSERT_EQUAL(false, manager.getRecode().getExistsRight());
 }

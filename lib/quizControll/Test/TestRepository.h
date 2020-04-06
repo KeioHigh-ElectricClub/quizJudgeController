@@ -1,7 +1,9 @@
 #pragma once
 
 #include <Arduino.h>
+
 #include <vector>
+
 #include "domain/Recode/IResultRepository.h"
 #include "domain/Recode/Result.h"
 
@@ -9,6 +11,10 @@ class TestRepository : public IResultRepository {
  public:
   TestRepository() {}
   ~TestRepository() {}
+  bool init() {
+    storage.clear();
+    return true;
+  }
 
   bool store(std::unique_ptr<Recode> result) override {
     Data received;
