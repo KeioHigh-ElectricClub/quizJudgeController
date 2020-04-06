@@ -7,7 +7,6 @@ class Config {
  public:
   Config(IConfigOutput* output) { this->output = output; }
   bool setLimit(Limit limit);
-  bool softReset();
 
  private:
   IConfigOutput* output;

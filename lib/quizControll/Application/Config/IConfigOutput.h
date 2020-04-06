@@ -8,5 +8,4 @@ class IConfigOutput {
   virtual ~IConfigOutput() {}
 
   virtual bool setLimit(Limit limit);
-  virtual bool softReset();
 };

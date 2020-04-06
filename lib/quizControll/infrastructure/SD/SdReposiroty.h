@@ -15,6 +15,7 @@ class SdRepository : public IResultRepository {
   ~SdRepository();
 
   bool store(std::unique_ptr<Result> result);
+  bool storeResetRecode();
   bool init();
 
  private:
@@ -23,6 +24,7 @@ class SdRepository : public IResultRepository {
   int questionNum = 0;
 
   String createFileName(int num);
+  bool write(String data);
   bool isConnected();
   bool canWrite();
 };

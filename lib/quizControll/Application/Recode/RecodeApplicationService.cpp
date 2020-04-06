@@ -11,7 +11,7 @@ RecodeApplicationService::RecodeApplicationService(
 
 void RecodeApplicationService::createAnswerRight(byte respondentNum,
                                                  byte waiting) {
-  if (nowRight != nullptr) return;
+  // if (nowRight != nullptr) return;
   nowRight = std::unique_ptr<AnswerRight>(new AnswerRight(respondentNum));
   this->waiting = waiting;
 }
@@ -26,7 +26,11 @@ void RecodeApplicationService::showIncorrect() {
   else
     controller->assignRight();
 }
-void RecodeApplicationService::reset() { nowRight.reset(); }
+void RecodeApplicationService::reset() {
+  nowRight.reset();
+  controller->softReset();
+  resultRepository->storeResetRecode();
+}
 RecodeModel RecodeApplicationService::getRecode() {
   RecodeModel model;
   if (nowRight == nullptr) {

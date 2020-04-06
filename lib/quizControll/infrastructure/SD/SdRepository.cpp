@@ -29,6 +29,14 @@ bool SdRepository::init() {
   return true;
 }
 
+bool SdRepository::storeResetRecode() {
+  char buffer[10];
+  sprintf(buffer, "%d,Reset", questionNum);
+  if (!write(buffer)) return false;
+  questionNum++;
+  return true;
+}
+
 bool SdRepository::store(std::unique_ptr<Result> result) {
   byte respondentNum = result->getRespondentNum();
   bool erratum = result->getErratum() == Erratum::CORRECT;
@@ -36,14 +44,19 @@ bool SdRepository::store(std::unique_ptr<Result> result) {
   char buffer[15];
   sprintf(buffer, "%d,%d,%d", questionNum, respondentNum, erratum);
 
+  if (!write(buffer)) return false;
+  if (erratum) questionNum++;
+
+  return true;
+}
+
+bool SdRepository::write(String data) {
   if (!(isConnected() || canWrite())) return false;
   if (!SD.begin(cs, SPI, 24000000)) return false;
   File file = SD.open(nowFileName, FILE_APPEND);
-  file.println(buffer);
+  file.println(data);
   file.close();
   SD.end();
-
-  if (erratum) questionNum++;
 }
 
 String SdRepository::createFileName(int num) {

@@ -10,5 +10,6 @@ class IResultRepository {
   virtual ~IResultRepository() {}
 
   virtual bool store(std::unique_ptr<Recode> result);
+  virtual bool storeResetRecode();
   virtual bool init();
 };
