@@ -1,15 +1,11 @@
 #include "Application/Recode/RecodeApplicationService.h"
 
 RecodeApplicationService::RecodeApplicationService(
-    IControllJudgeOutput* controller) {
+    IControllJudgeOutput* controller, IResultRepository* _resultRepository) {
   if (controller == nullptr) throw "set controller";
   this->controller = controller;
-}
-RecodeApplicationService::RecodeApplicationService(
-    IControllJudgeOutput* controller, IResultRepository* _resultRepository)
-    : RecodeApplicationService(controller) {
   if (_resultRepository == nullptr) return;
-  isRecoding = true;
+
   resultRepository = _resultRepository;
 }
 
@@ -40,16 +36,14 @@ RecodeModel RecodeApplicationService::getRecode() {
   }
   return model;
 }
-void RecodeApplicationService::setIsRecoding(bool isRecoding) {
-  this->isRecoding = isRecoding;
-  if (this->isRecoding) resultRepository->init();
+void RecodeApplicationService::setIResultRepository(
+    IResultRepository* _resultRepository) {
+  resultRepository = _resultRepository;
 }
-bool RecodeApplicationService::getIsRecoding() { return isRecoding; }
 
 void RecodeApplicationService::setErratum(Erratum erratum) {
   if (nowRight == nullptr) return;
   nowRight->setErratum(erratum);
-  if (!isRecoding) return;
 
   resultRepository->store(std::move(nowRight));
   nowRight.reset();

@@ -1,19 +1,18 @@
 #pragma once
 
 #include <Arduino.h>
+
 #include <memory>
 
+#include "Application/Recode/IControllJudgeOutput.h"
+#include "Application/Recode/RecodeModel.h"
 #include "domain/Recode/AnswerRight.h"
 #include "domain/Recode/Erratum.h"
 #include "domain/Recode/IResultRepository.h"
 #include "domain/Recode/Result.h"
 
-#include "Application/Recode/IControllJudgeOutput.h"
-#include "Application/Recode/RecodeModel.h"
-
 class RecodeApplicationService {
  public:
-  RecodeApplicationService(IControllJudgeOutput* controller);
   RecodeApplicationService(IControllJudgeOutput* controller,
                            IResultRepository* _resultRepository);
   ~RecodeApplicationService() {}
@@ -24,8 +23,7 @@ class RecodeApplicationService {
   void reset();
   RecodeModel getRecode();
 
-  void setIsRecoding(bool isRecoding);
-  bool getIsRecoding();
+  void setIResultRepository(IResultRepository* _resultRepository);
 
  private:
   bool isRecoding = false;
