@@ -12,6 +12,7 @@ class Footer : public IPage {
   void draw() override;
 
   void setMessage(String left, String center, String right);
+  void setEnableLongPush(bool left, bool center, bool right);
   bool isLeftPushed();
   bool isLeftPushedLong();
   bool isCenterPushed();
@@ -22,11 +23,15 @@ class Footer : public IPage {
   const uint8_t centerBtnPin = 34;
   const uint8_t rightBtnPin = 35;
 
-  bool isLeftPushedLongInternal = false;
-  bool previousLeftPushedLong = false;
+  bool isButtonLongPushed[3];
+  bool previousButtonPushedLong[3];
   bool isButtonPushed[3];
+  bool isEnableLongPush[3];
 
   Button btns[3];
+
+  bool isButtonPushedInternal(byte num);
+  bool isButtonPushedLongInternal(byte num);
 
   void initFrame();
   void initButton();

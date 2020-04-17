@@ -21,34 +21,44 @@ void Footer::initButton() {
   }
 }
 
+void Footer::setEnableLongPush(bool left, bool center, bool right) {
+  isEnableLongPush[0] = left;
+  isEnableLongPush[1] = center;
+  isEnableLongPush[2] = right;
+}
+
 void Footer::update() {
-  for (auto btn : btns) {
-    btn.read();
-  }
-  if (btns[0].pressedFor(1000)) {
-    isLeftPushedLongInternal = true;
-    previousLeftPushedLong = true;
-  } else if (btns[0].wasReleased()) {
-    if (previousLeftPushedLong) {
-      previousLeftPushedLong = false;
+  for (byte i = 0; i < sizeof(btns) / sizeof(btns[0]); i++) {
+    btns[i].read();
+    if (isEnableLongPush[i] && btns[i].pressedFor(1000)) {
+      isButtonLongPushed[i] = true;
+      previousButtonPushedLong[i] = true;
+    } else if (btns[i].wasReleased()) {
+      if (previousButtonPushedLong[i]) {
+        previousButtonPushedLong[i] = false;
+        return;
+      }
+      isButtonPushed[i] = true;
       return;
     }
-    isButtonPushed[0] = true;
-    return;
-  }
-  if (btns[1].wasReleased()) {
-    isButtonPushed[1] = true;
-    return;
-  }
-  if (btns[2].wasReleased()) {
-    isButtonPushed[2] = true;
-    return;
   }
 }
-bool Footer::isLeftPushed() { return isButtonPushed[0]; }
-bool Footer::isLeftPushedLong() { return isLeftPushedLong; }
-bool Footer::isCenterPushed() { return isButtonPushed[1]; }
-bool Footer::isRightPushed() { return isButtonPushed[2]; }
+
+bool Footer::isButtonPushedInternal(byte num) {
+  bool temp = isButtonPushed[num];
+  isButtonPushed[num] = false;
+  return temp;
+}
+bool Footer::isButtonPushedLongInternal(byte num) {
+  bool temp = isButtonLongPushed[num];
+  isButtonLongPushed[num] = false;
+  return temp;
+}
+
+bool Footer::isLeftPushed() { return isButtonPushedInternal(0); }
+bool Footer::isLeftPushedLong() { return isButtonPushedLongInternal(0); }
+bool Footer::isCenterPushed() { return isButtonPushedInternal(1); }
+bool Footer::isRightPushed() { return isButtonPushedInternal(2); }
 
 void Footer::draw() {}
 
