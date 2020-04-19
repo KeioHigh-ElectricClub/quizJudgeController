@@ -23,7 +23,10 @@ class TestRepository : public IResultRepository {
     storage.push_back(received);
     return true;
   }
-  bool storeResetRecode() { Serial.println("Reset"); }
+  bool storeResetRecode() {
+    Serial.println("Reset");
+    return true;
+  }
 
   int getRespondent(int num) { return storage[num].respondent; }
   bool getIsCorrect(int num) { return storage[num].isCorrect; }

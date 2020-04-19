@@ -12,11 +12,14 @@ class PageManager : public IPageChange {
   PageManager(PageFactory* factory);
   ~PageManager() {}
 
+  void init();
   void update();
   void draw();
   void changePage(PageList nextPage) override;
 
  private:
   std::unique_ptr<IPage> nowPage;
+  std::unique_ptr<IPage> header;
+  std::unique_ptr<IPage> footer;
   PageFactory* factory;
 };

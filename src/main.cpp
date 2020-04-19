@@ -2,18 +2,33 @@
 
 #include <Arduino.h>
 
-#include <DFRobotDFPlayerMini.h>
-#include <SD.h>
+#include "Application/Config/Config.h"
+#include "Application/Recode/RecodeApplicationService.h"
 #include "TFT_eSPI.h"
-#include "domain/AnswerRight.h"
+#include "Test/TestJudgeOutput.h"
+#include "Test/TestRepository.h"
+#include "UI/PageFactory.h"
+#include "UI/PageManager.h"
+
+TFT_eSPI display(320, 240);
+
+TestRepository repository;
+TestJudgeOutput judgeOutput;
+RecodeApplicationService recodeService(&judgeOutput, &repository);
+Config config(&judgeOutput);
+PageFactory factory(&display, &recodeService, &config);
+PageManager manager(&factory);
 
 void setup() {
   Serial.begin(115200);
-  AnswerRight right(1);
-  right.setErratum(Erratum::CORRECT);
-  // TEST_ASSERT_EQUAL(Erratum::CORRECT, right.getErratum());
-  right.setErratum(Erratum::INCORRECT);
-  // TEST_ASSERT_EQUAL(Erratum::INCORRECT, right.getErratum());
+
+  try {
+    manager.init();
+    manager.update();
+    manager.draw();
+  } catch (char* e) {
+    Serial.println(e);
+  }
 }
 void loop() {}
 

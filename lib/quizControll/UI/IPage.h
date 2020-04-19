@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PageManager.h"
+#include "IPageChange.h"
 #include "TFT_eSPI.h"
 
 class IPage {
