@@ -36,7 +36,7 @@ RecodeModel RecodeApplicationService::getRecode() {
   if (nowRight == nullptr) {
     model = RecodeModel();
   } else {
-    model = RecodeModel(nowRight->getRespondentNum());
+    model = RecodeModel(nowRight->getRespondentNum(), waiting);
   }
   return model;
 }
