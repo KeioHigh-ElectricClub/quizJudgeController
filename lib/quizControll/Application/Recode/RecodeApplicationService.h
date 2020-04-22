@@ -4,6 +4,7 @@
 
 #include <memory>
 
+#include "Application/Recode/DummyRepository.h"
 #include "Application/Recode/IControllJudgeOutput.h"
 #include "Application/Recode/RecodeModel.h"
 #include "domain/Recode/AnswerRight.h"
@@ -23,7 +24,9 @@ class RecodeApplicationService {
   void reset();
   RecodeModel getRecode();
 
-  void setIResultRepository(IResultRepository* _resultRepository);
+  void enableRecoding();
+  void disableRecoding();
+  bool getCanRecoding();
 
  private:
   bool isRecoding = false;
@@ -31,6 +34,7 @@ class RecodeApplicationService {
   std::unique_ptr<AnswerRight> nowRight = nullptr;
   IResultRepository* resultRepository = nullptr;
   IControllJudgeOutput* controller = nullptr;
+  bool canRecoding = false;
 
   void setErratum(Erratum erratum);
 };

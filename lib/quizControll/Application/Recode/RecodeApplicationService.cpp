@@ -29,7 +29,9 @@ void RecodeApplicationService::showIncorrect() {
 void RecodeApplicationService::reset() {
   nowRight.reset();
   controller->softReset();
-  resultRepository->storeResetRecode();
+  if (canRecoding) {
+    resultRepository->storeResetRecode();
+  }
 }
 RecodeModel RecodeApplicationService::getRecode() {
   RecodeModel model;
@@ -40,15 +42,19 @@ RecodeModel RecodeApplicationService::getRecode() {
   }
   return model;
 }
-void RecodeApplicationService::setIResultRepository(
-    IResultRepository* _resultRepository) {
-  resultRepository = _resultRepository;
+void RecodeApplicationService::enableRecoding() {
+  canRecoding = true;
+  resultRepository->init();
 }
+void RecodeApplicationService::disableRecoding() { canRecoding = false; }
+bool RecodeApplicationService::getCanRecoding() { return canRecoding; }
 
 void RecodeApplicationService::setErratum(Erratum erratum) {
   if (nowRight == nullptr) return;
   nowRight->setErratum(erratum);
 
-  resultRepository->store(std::move(nowRight));
+  if (canRecoding) {
+    resultRepository->store(std::move(nowRight));
+  }
   nowRight.reset();
 }
