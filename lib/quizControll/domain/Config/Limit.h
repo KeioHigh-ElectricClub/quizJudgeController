@@ -1,3 +1,3 @@
 #pragma once
 
-enum Limit { UNTIL1, UNTIL2, UNTIL20 };
+enum class Limit { UNTIL1, UNTIL2, UNTIL20 };
