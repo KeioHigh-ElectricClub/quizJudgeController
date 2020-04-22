@@ -16,4 +16,5 @@ class IPage {
  protected:
   TFT_eSPI* display;
   IPageChange* changer;
+  bool mustUpdate;
 };

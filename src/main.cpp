@@ -26,7 +26,8 @@ void setup() {
     manager.init();
     manager.update();
     manager.draw();
-  } catch (char* e) {
+  } catch (const char* e) {
+    Serial.println("exception");
     Serial.println(e);
   }
 }
