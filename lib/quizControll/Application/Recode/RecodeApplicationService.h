@@ -4,7 +4,6 @@
 
 #include <memory>
 
-#include "Application/Recode/DummyRepository.h"
 #include "Application/Recode/IControllJudgeOutput.h"
 #include "Application/Recode/RecodeModel.h"
 #include "domain/Recode/AnswerRight.h"
