@@ -7,6 +7,7 @@ class Config {
  public:
   Config(IConfigOutput* output) { this->output = output; }
   bool setLimit(Limit limit);
+  Limit getLimit();
 
  private:
   IConfigOutput* output;
