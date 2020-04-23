@@ -24,7 +24,8 @@ class Footer : public IPage {
   const uint8_t rightBtnPin = 35;
 
   bool isButtonLongPushed[3];
-  bool previousButtonPushedLong[3];
+  bool prevPagePushedButton[3];
+  bool prevPushedButtonLong[3];
   bool isButtonPushed[3];
   bool isEnableLongPush[3];
 

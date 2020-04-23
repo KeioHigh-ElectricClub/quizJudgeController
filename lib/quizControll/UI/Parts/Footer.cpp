@@ -1,7 +1,9 @@
 #include "Footer.h"
 
 Footer::Footer(TFT_eSPI* display, IPageChange* changer)
-    : IPage(display, changer), btns{leftBtnPin, centerBtnPin, rightBtnPin} {}
+    : IPage(display, changer),
+      btns{leftBtnPin, centerBtnPin, rightBtnPin},
+      prevPagePushedButton{0} {}
 
 void Footer::init() {
   initFrame();
@@ -16,8 +18,9 @@ void Footer::initFrame() {
 }
 
 void Footer::initButton() {
-  for (auto btn : btns) {
-    btn.begin();
+  for (byte i = 0; i < sizeof(btns) / sizeof(btns[0]); i++) {
+    btns[i].begin();
+    if (btns[i].isPressed()) prevPagePushedButton[i] = true;
   }
 }
 
@@ -30,12 +33,15 @@ void Footer::setEnableLongPush(bool left, bool center, bool right) {
 void Footer::update() {
   for (byte i = 0; i < sizeof(btns) / sizeof(btns[0]); i++) {
     btns[i].read();
+
     if (isEnableLongPush[i] && btns[i].pressedFor(1000)) {
+      if (prevPagePushedButton[i]) return;
       isButtonLongPushed[i] = true;
-      previousButtonPushedLong[i] = true;
+      prevPushedButtonLong[i] = true;
     } else if (btns[i].wasReleased()) {
-      if (previousButtonPushedLong[i]) {
-        previousButtonPushedLong[i] = false;
+      if (prevPushedButtonLong[i] || prevPagePushedButton[i]) {
+        prevPushedButtonLong[i] = false;
+        prevPagePushedButton[i] = false;
         return;
       }
       isButtonPushed[i] = true;
