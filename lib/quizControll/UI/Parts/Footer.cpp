@@ -71,11 +71,11 @@ void Footer::draw() {}
 void Footer::setMessage(String left, String center, String right) {
   display->setCursor(53, 208);
   display->setTextDatum(TC_DATUM);
-  display->print(left);
+  display->drawString(left, 53, 208);
 
   display->setCursor(160, 208);
-  display->print(center);
+  display->drawString(center, 160, 208);
 
   display->setCursor(267, 208);
-  display->print(right);
+  display->drawString(right, 267, 208);
 }

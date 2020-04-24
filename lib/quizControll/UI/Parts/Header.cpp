@@ -14,7 +14,7 @@ void Header::init() {
 
   display->setTextDatum(TL_DATUM);
   display->setCursor(286, 16);
-  display->print("まで");
+  display->drawString("まで", 186, 16);
 
   canRecode = recodeApp->getCanRecoding();
   nowLimit = config->getLimit();
@@ -36,14 +36,14 @@ void Header::draw() {
   String recoding;
   if (canRecode) {
     recoding = "記録ON";
-    display->setTextColor(TFT_RED);
+    display->setTextColor(TFT_RED, TFT_WHITE);
   } else {
     recoding = "記録OFF";
-    display->setTextColor(TFT_BLACK);
+    display->setTextColor(TFT_BLACK, TFT_WHITE);
   }
   display->setTextDatum(TC_DATUM);
-  display->setCursor(197, 6);
-  display->print(recoding);
+  display->setTextPadding(78);
+  display->drawString(recoding, 197, 6);
 
   String limit;
   switch (nowLimit) {
@@ -57,11 +57,11 @@ void Header::draw() {
       limit = "20位";
       break;
   }
-  display->fillRect(244, 6, 42, 26, TFT_WHITE);
+
   display->setTextDatum(TL_DATUM);
-  display->setCursor(286, 6);
-  display->setTextColor(TFT_BLACK);
-  display->print(limit);
+  display->setTextPadding(42);
+  display->setTextColor(TFT_BLACK, TFT_WHITE);
+  display->drawString(limit, 285, 6);
 
   mustUpdate = false;
 }
