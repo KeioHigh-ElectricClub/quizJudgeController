@@ -63,7 +63,7 @@ void MainPage::draw() {
   display->unloadFont();
 
   display->loadFont("YuGothic20");
-  display->setTextDatum(TL_DATUM);
+  display->setTextDatum(TR_DATUM);
   display->setTextPadding(22);
   display->drawNumber(waiting, 196, 61);
   display->unloadFont();
