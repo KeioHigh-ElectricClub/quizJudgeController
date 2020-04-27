@@ -1,8 +1,8 @@
 #include "Header.h"
 
-Header::Header(TFT_eSPI* display, IPageChange* changer,
-               RecodeApplicationService* recodeApp, Config* config)
-    : IPage(display, changer) {
+Header::Header(TFT_eSPI* display, RecodeApplicationService* recodeApp,
+               Config* config)
+    : IParts(display) {
   this->recodeApp = recodeApp;
   this->config = config;
 }

@@ -4,20 +4,19 @@
 
 #include "Application/Config/Config.h"
 #include "Application/Recode/RecodeApplicationService.h"
-#include "IPage.h"
-#include "IPageChange.h"
-#include "PageList.h"
+#include "IParts.h"
 #include "TFT_eSPI.h"
+#include "UI/PartsList.h"
 #include "infrastructure/Button/ButtonInput.h"
 // #include "UI/Page/MainPage.h"
-#include "UI/Page/MainPage.h"
-#include "UI/Page/MenuPage.h"
 
-class PageFactory {
+#include "Parts/Header.h"
+
+class PartsFactory {
  public:
-  PageFactory(TFT_eSPI* display, RecodeApplicationService* recodeApp,
-              Config* config, ButtonInput* button);
-  std::unique_ptr<IPage> createPage(PageList page, IPageChange* changer);
+  PartsFactory(TFT_eSPI* display, RecodeApplicationService* recodeApp,
+               Config* config, ButtonInput* button);
+  std::unique_ptr<IParts> createPage(PartsList parts);
 
  protected:
   TFT_eSPI* display;

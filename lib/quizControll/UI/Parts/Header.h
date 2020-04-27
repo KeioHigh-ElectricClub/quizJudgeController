@@ -2,12 +2,12 @@
 
 #include "Application/Config/Config.h"
 #include "Application/Recode/RecodeApplicationService.h"
-#include "UI/IPage.h"
+#include "UI/IParts.h"
 
-class Header : public IPage {
+class Header : public IParts {
  public:
-  Header(TFT_eSPI* display, IPageChange* changer,
-         RecodeApplicationService* recodeApp, Config* config);
+  Header(TFT_eSPI* display, RecodeApplicationService* recodeApp,
+         Config* config);
   void init() override;
   void update() override;
   void draw() override;

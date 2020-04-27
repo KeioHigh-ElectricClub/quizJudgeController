@@ -1,15 +1,14 @@
 #include "MainPage.h"
 
-MainPage::MainPage(TFT_eSPI* display, IPageChange* changer,
-                   RecodeApplicationService* recodeApp, Footer* footer)
-    : IPage(display, changer) {
+MainPage::MainPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button,
+                   RecodeApplicationService* recodeApp)
+    : IPage(display, changer, button) {
   this->recodeApp = recodeApp;
-  this->footer = footer;
 }
 
 void MainPage::init() {
-  footer->init();
-  footer->setEnableLongPush(true, false, false);
+  button->init();
+  button->setEnableLongPush(true, false, false);
   footer->setMessage("リセット", "不正解", "正解");
 
   display->loadFont("YuGothic20");
@@ -33,16 +32,16 @@ void MainPage::init() {
   draw();
 }
 void MainPage::update() {
-  if (footer->isLeftPushedLong()) {
-    changer->changePage(PageList::Select_p);
+  if (button->isLeftPushedLong()) {
+    changer->changePage(PageList::Menu_p);
   }
-  if (footer->isLeftPushed()) {
+  if (button->isLeftPushed()) {
     recodeApp->reset();
   }
-  if (footer->isCenterPushed()) {
+  if (button->isCenterPushed()) {
     recodeApp->showIncorrect();
   }
-  if (footer->isRightPushed()) {
+  if (button->isRightPushed()) {
     recodeApp->showCorrect();
   }
 

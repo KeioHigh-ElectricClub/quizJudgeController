@@ -1,13 +1,16 @@
 #pragma once
 
+#include <memory>
+
 #include "Application/Recode/RecodeApplicationService.h"
 #include "UI/IPage.h"
 #include "UI/Parts/Footer.h"
+#include "infrastructure/Button/ButtonInput.h"
 
 class MainPage : public IPage {
  public:
-  MainPage(TFT_eSPI* display, IPageChange* changer,
-           RecodeApplicationService* recodeApp, Footer* footer);
+  MainPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button,
+           RecodeApplicationService* recodeApp);
 
   void init() override;
   void update() override;
@@ -15,7 +18,8 @@ class MainPage : public IPage {
 
  private:
   RecodeApplicationService* recodeApp;
-  Footer* footer;
+  ButtonInput* button;
+  std::unique_ptr<Footer> footer;
 
   RecodeModel model;
 
