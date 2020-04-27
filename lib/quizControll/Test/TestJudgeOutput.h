@@ -4,6 +4,7 @@
 
 #include "Application/Config/IConfigOutput.h"
 #include "Application/Recode/IControllJudgeOutput.h"
+#include "domain/Config/Limit.h"
 
 class TestJudgeOutput : public IConfigOutput, public IControllJudgeOutput {
  public:
@@ -16,13 +17,13 @@ class TestJudgeOutput : public IConfigOutput, public IControllJudgeOutput {
   }
   bool setLimit(Limit limit) {
     switch (limit) {
-      case UNTIL1:
+      case Limit::UNTIL1:
         Serial.println("UNTIL1");
         break;
-      case UNTIL2:
+      case Limit::UNTIL2:
         Serial.println("UNTIL2");
         break;
-      case UNTIL20:
+      case Limit::UNTIL20:
         Serial.println("UNTIL20");
         break;
     }
