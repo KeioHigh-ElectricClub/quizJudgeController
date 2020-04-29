@@ -14,7 +14,7 @@
 
 class PageManager : public IPageChange {
  public:
-  PageManager(PageFactory* pageFactory, PartsFactory* partsFactory,
+  PageManager(PageFactory& pageFactory, PartsFactory& partsFactory,
               TFT_eSPI* display);
   ~PageManager() {}
 
@@ -27,7 +27,7 @@ class PageManager : public IPageChange {
  private:
   std::unique_ptr<IPage> nowPage;
   std::unique_ptr<IParts> header;
-  PageFactory* pageFactory;
-  PartsFactory* partsFactory;
+  PageFactory& pageFactory;
+  PartsFactory& partsFactory;
   TFT_eSPI* display;
 };

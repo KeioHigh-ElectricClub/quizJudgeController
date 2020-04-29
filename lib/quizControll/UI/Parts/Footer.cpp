@@ -15,11 +15,11 @@ void Footer::init() {
 void Footer::setMessage(String left, String center, String right) {
   display->setCursor(53, 208);
   display->setTextDatum(TC_DATUM);
-  display->drawString(left, 53, 208);
+  // display->drawString(left, 53, 208);
 
   display->setCursor(160, 208);
-  display->drawString(center, 160, 208);
+  // display->drawString(center, 160, 208);
 
   display->setCursor(267, 208);
-  display->drawString(right, 267, 208);
+  // display->drawString(right, 267, 208);
 }

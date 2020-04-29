@@ -1,11 +1,17 @@
 #include "ButtonInput.h"
 
-ButtonInput::ButtonInput() {}
+const uint8_t ButtonInput::buttonPin[] = {32, 34, 35};
+
+ButtonInput::ButtonInput() {
+  for (byte i = 0; i < 3; i++) {
+    btns[i] = std::unique_ptr<Button>(new Button(buttonPin[i]));
+  }
+}
 
 void ButtonInput::init() {
-  for (byte i = 0; i < sizeof(btns) / sizeof(btns[0]); i++) {
-    btns[i].begin();
-    if (btns[i].isPressed()) prevPagePushedButton[i] = true;
+  for (byte i = 0; i < 3; i++) {
+    btns[i]->begin();
+    if (btns[i]->isPressed()) prevPagePushedButton[i] = true;
   }
 }
 
@@ -17,13 +23,13 @@ void ButtonInput::setEnableLongPush(bool left, bool center, bool right) {
 
 void ButtonInput::update() {
   for (byte i = 0; i < sizeof(btns) / sizeof(btns[0]); i++) {
-    btns[i].read();
+    btns[i]->read();
 
-    if (isEnableLongPush[i] && btns[i].pressedFor(1000)) {
+    if (isEnableLongPush[i] && btns[i]->pressedFor(1000)) {
       if (prevPagePushedButton[i]) return;
       isButtonLongPushed[i] = true;
       prevPushedButtonLong[i] = true;
-    } else if (btns[i].wasReleased()) {
+    } else if (btns[i]->wasReleased()) {
       if (prevPushedButtonLong[i] || prevPagePushedButton[i]) {
         prevPushedButtonLong[i] = false;
         prevPagePushedButton[i] = false;

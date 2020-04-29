@@ -9,7 +9,7 @@ PartsFactory::PartsFactory(TFT_eSPI* display,
   this->button = button;
 }
 
-std::unique_ptr<IParts> PartsFactory::createPage(PartsList page) {
+std::unique_ptr<IParts> PartsFactory::create(PartsList page) {
   switch (page) {
     case PartsList::Header:
       return std::unique_ptr<IParts>(new Header(display, recodeApp, config));

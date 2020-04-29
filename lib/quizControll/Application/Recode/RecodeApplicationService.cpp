@@ -1,13 +1,8 @@
 #include "Application/Recode/RecodeApplicationService.h"
 
 RecodeApplicationService::RecodeApplicationService(
-    IControllJudgeOutput* controller, IResultRepository* _resultRepository) {
-  if (controller == nullptr) throw "set controller";
-  this->controller = controller;
-  if (_resultRepository == nullptr) return;
-
-  resultRepository = _resultRepository;
-}
+    IControllJudgeOutput& controller, IResultRepository& _resultRepository)
+    : resultRepository(resultRepository), controller(controller) {}
 
 void RecodeApplicationService::createAnswerRight(byte respondentNum,
                                                  byte waiting) {
@@ -17,21 +12,21 @@ void RecodeApplicationService::createAnswerRight(byte respondentNum,
 }
 void RecodeApplicationService::showCorrect() {
   setErratum(Erratum::CORRECT);
-  controller->softReset();
+  controller.softReset();
 }
 void RecodeApplicationService::showIncorrect() {
   setErratum(Erratum::INCORRECT);
   if (waiting <= 1)
-    controller->softReset();
+    controller.softReset();
   else
-    controller->assignRight();
+    controller.assignRight();
 }
 void RecodeApplicationService::reset() {
-  nowRight.reset();
-  controller->softReset();
-  if (canRecoding) {
-    resultRepository->storeResetRecode();
+  controller.softReset();
+  if (canRecoding && nowRight != nullptr) {
+    resultRepository.storeResetRecode();
   }
+  nowRight.reset();
 }
 RecodeModel RecodeApplicationService::getRecode() {
   RecodeModel model;
@@ -44,7 +39,7 @@ RecodeModel RecodeApplicationService::getRecode() {
 }
 void RecodeApplicationService::enableRecoding() {
   canRecoding = true;
-  resultRepository->init();
+  resultRepository.init();
 }
 void RecodeApplicationService::disableRecoding() { canRecoding = false; }
 bool RecodeApplicationService::getCanRecoding() { return canRecoding; }
@@ -54,7 +49,7 @@ void RecodeApplicationService::setErratum(Erratum erratum) {
   nowRight->setErratum(erratum);
 
   if (canRecoding) {
-    resultRepository->store(std::move(nowRight));
+    resultRepository.store(std::move(nowRight));
   }
   nowRight.reset();
 }

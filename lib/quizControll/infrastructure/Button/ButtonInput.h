@@ -2,11 +2,14 @@
 
 #include <JC_Button.h>
 
+#include <memory>
+
 class ButtonInput {
  public:
   ButtonInput();
   ~ButtonInput() {}
 
+  void init();
   void update();
 
   void setEnableLongPush(bool left, bool center, bool right);
@@ -14,20 +17,18 @@ class ButtonInput {
   bool isLeftPushedLong();
   bool isCenterPushed();
   bool isRightPushed();
-  void init();
 
  private:
-  const uint8_t leftBtnPin = 32;
-  const uint8_t centerBtnPin = 34;
-  const uint8_t rightBtnPin = 35;
+  static const uint8_t buttonPin[];
 
-  bool isButtonLongPushed[3]{0};
-  bool prevPagePushedButton[3]{0};
-  bool prevPushedButtonLong[3]{0};
-  bool isButtonPushed[3]{0};
-  bool isEnableLongPush[3]{0};
+  bool isButtonLongPushed[3] = {0};
+  bool prevPagePushedButton[3] = {0};
+  bool prevPushedButtonLong[3] = {0};
+  bool isButtonPushed[3] = {0};
+  bool isEnableLongPush[3] = {0};
 
-  Button btns[3]{leftBtnPin, centerBtnPin, rightBtnPin};
+  std::unique_ptr<Button> btns[3];
+  bool aaa = false;
 
   bool isButtonPushedInternal(byte num);
   bool isButtonPushedLongInternal(byte num);

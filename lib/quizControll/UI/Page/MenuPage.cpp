@@ -7,7 +7,7 @@
 
 MenuPage::MenuPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button)
     : IPage(display, changer, button) {
-  this->button = button;
+  Serial.println("MenuPage constructor");
 }
 
 void MenuPage::init() {
@@ -15,10 +15,11 @@ void MenuPage::init() {
   footer->setMessage("決定", "◀", "▶");
   button->setEnableLongPush(false, false, false);
 
-  items[0][0] = {"戻る", [this]() { changer->changePage(PageList::Main_p); }};
+  items[0][0] = {"戻る", [this]() { changer->changePage(PageList::Main); }};
   items[0][1] = {"判定\n人数",
-                 [this]() { changer->changePage(PageList::Config_p); }};
-  items[1][0] = {"記録", [this]() { changer->changePage(PageList::Config_p); }};
+                 [this]() { changer->changePage(PageList::ConfigLimit); }};
+  items[1][0] = {"記録",
+                 [this]() { changer->changePage(PageList::ConfigRecode); }};
   items[1][1] = {ignoreItem, []() {}};
 
   display->fillRect(37, 0, 162, 320, TFT_WHITE);
@@ -84,7 +85,7 @@ void MenuPage::onRightPushed() {
 void MenuPage::draw() {
   if (!mustUpdate) return;
 
-  display->loadFont("YuGothic20");
+  // display->loadFont("YuGothic20");
 
   for (int i = 0; i < 2; i++) {
     if (items[pageIndex][i].name == ignoreItem) continue;
@@ -98,7 +99,7 @@ void MenuPage::draw() {
 
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
-    display->drawString(items[pageIndex][i].name, 99, 120);
+    // display->drawString(items[pageIndex][i].name, 99, 120);
   }
   display->unloadFont();
 

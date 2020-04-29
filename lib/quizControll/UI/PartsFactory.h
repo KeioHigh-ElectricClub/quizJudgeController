@@ -16,7 +16,7 @@ class PartsFactory {
  public:
   PartsFactory(TFT_eSPI* display, RecodeApplicationService* recodeApp,
                Config* config, ButtonInput* button);
-  std::unique_ptr<IParts> createPage(PartsList parts);
+  std::unique_ptr<IParts> create(PartsList parts);
 
  protected:
   TFT_eSPI* display;

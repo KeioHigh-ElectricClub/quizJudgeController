@@ -5,11 +5,11 @@
 
 class Config {
  public:
-  Config(IConfigOutput* output) { this->output = output; }
+  Config(IConfigOutput& output);
   bool setLimit(Limit limit);
   Limit getLimit();
 
  private:
-  IConfigOutput* output;
+  IConfigOutput& output;
   Limit nowLimit;
 };

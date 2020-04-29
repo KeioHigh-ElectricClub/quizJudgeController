@@ -11,6 +11,7 @@ class MainPage : public IPage {
  public:
   MainPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button,
            RecodeApplicationService* recodeApp);
+  ~MainPage() {}
 
   void init() override;
   void update() override;
@@ -18,8 +19,6 @@ class MainPage : public IPage {
 
  private:
   RecodeApplicationService* recodeApp;
-  ButtonInput* button;
-  std::unique_ptr<Footer> footer;
 
   RecodeModel model;
 

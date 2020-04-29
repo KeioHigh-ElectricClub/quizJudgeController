@@ -8,6 +8,7 @@
 class Footer {
  public:
   Footer(TFT_eSPI* display, ButtonInput* button);
+  ~Footer() {}
   void init();
   void update();
   void draw();

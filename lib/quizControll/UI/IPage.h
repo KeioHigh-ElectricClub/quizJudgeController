@@ -15,6 +15,7 @@ class IPage {
     this->button = button;
     footer = std::unique_ptr<Footer>(new Footer(display, button));
   }
+  virtual ~IPage() {}
   virtual void init() = 0;
   virtual void update() = 0;
   virtual void draw() = 0;

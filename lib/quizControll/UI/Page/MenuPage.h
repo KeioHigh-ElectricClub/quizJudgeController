@@ -11,14 +11,13 @@ constexpr byte MAX_PAGE = 2;
 class MenuPage : public IPage {
  public:
   MenuPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button);
+  ~MenuPage() {}
 
   void init() override;
   void update() override;
   void draw() override;
 
  private:
-  ButtonInput* button;
-
   struct Item {
     String name;
     std::function<void(void)> func;

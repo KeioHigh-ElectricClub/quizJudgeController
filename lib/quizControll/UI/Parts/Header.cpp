@@ -14,10 +14,11 @@ void Header::init() {
 
   display->setTextDatum(TL_DATUM);
   display->setCursor(286, 16);
-  display->drawString("まで", 186, 16);
+  // display->drawString("まで", 186, 16);
 
   canRecode = recodeApp->getCanRecoding();
   nowLimit = config->getLimit();
+  mustUpdate = true;
   draw();
 }
 
@@ -33,6 +34,8 @@ void Header::update() {
 void Header::draw() {
   if (!mustUpdate) return;
 
+  // display->loadFont("YuGothic20");
+
   String recoding;
   if (canRecode) {
     recoding = "記録ON";
@@ -43,7 +46,7 @@ void Header::draw() {
   }
   display->setTextDatum(TC_DATUM);
   display->setTextPadding(78);
-  display->drawString(recoding, 197, 6);
+  // display->drawString(recoding, 197, 6);
 
   String limit;
   switch (nowLimit) {
@@ -61,7 +64,9 @@ void Header::draw() {
   display->setTextDatum(TL_DATUM);
   display->setTextPadding(42);
   display->setTextColor(TFT_BLACK, TFT_WHITE);
-  display->drawString(limit, 285, 6);
+  // display->drawString(limit, 285, 6);
+
+  display->unloadFont();
 
   mustUpdate = false;
 }

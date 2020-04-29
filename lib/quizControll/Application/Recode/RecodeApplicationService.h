@@ -13,8 +13,8 @@
 
 class RecodeApplicationService {
  public:
-  RecodeApplicationService(IControllJudgeOutput* controller,
-                           IResultRepository* _resultRepository);
+  RecodeApplicationService(IControllJudgeOutput& controller,
+                           IResultRepository& _resultRepository);
   ~RecodeApplicationService() {}
 
   void createAnswerRight(byte respondentNum, byte waiting);
@@ -31,8 +31,8 @@ class RecodeApplicationService {
   bool isRecoding = false;
   byte waiting;
   std::unique_ptr<AnswerRight> nowRight = nullptr;
-  IResultRepository* resultRepository = nullptr;
-  IControllJudgeOutput* controller = nullptr;
+  IResultRepository& resultRepository;
+  IControllJudgeOutput& controller;
   bool canRecoding = false;
 
   void setErratum(Erratum erratum);
