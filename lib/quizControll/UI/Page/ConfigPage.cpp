@@ -16,7 +16,6 @@ void ConfigPage::init() {
 void ConfigPage::update() {
   if (button->isLeftPushed()) {
     items[positionIndex].func();
-    recodeApp->reset();
     return;
   }
   if (button->isCenterPushed()) {
