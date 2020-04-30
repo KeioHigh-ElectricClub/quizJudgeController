@@ -1,4 +1,4 @@
-#include "SdReposiroty.h"
+#include "SdRepository.h"
 
 SdRepository::SdRepository(byte cs, byte cd, byte wp) {
   this->cs = cs;
@@ -57,6 +57,7 @@ bool SdRepository::write(String data) {
   file.println(data);
   file.close();
   SD.end();
+  return true;
 }
 
 String SdRepository::createFileName(int num) {
