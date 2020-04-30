@@ -11,6 +11,7 @@
 #include "infrastructure/Button/ButtonInput.h"
 // #include "UI/Page/MainPage.h"
 #include "UI/Page/ConfigLimit.h"
+#include "UI/Page/ConfigRecode.h"
 #include "UI/Page/MainPage.h"
 #include "UI/Page/MenuPage.h"
 

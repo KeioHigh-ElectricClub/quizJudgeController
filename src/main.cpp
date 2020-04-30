@@ -26,7 +26,8 @@ PageManager manager(pageFactory, partsFactory, &display);
 void setup() {
   Serial.begin(115200);
 
-  PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit};
+  PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
+                          PageList::ConfigRecode};
 
   button.init();
 
@@ -34,7 +35,7 @@ void setup() {
     manager.init();
     manager.update();
     manager.draw();
-    for (byte i = 0; i < 2; i++) {
+    for (byte i = 0; i < 3; i++) {
       manager.update();
       manager.changePage(pageArray[i]);
       manager.draw();

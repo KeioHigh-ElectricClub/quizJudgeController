@@ -21,6 +21,10 @@ std::unique_ptr<IPage> PageFactory::create(PageList page,
     case PageList::ConfigLimit:
       return std::unique_ptr<IPage>(
           new ConfigLimit(display, changer, button, recodeApp, config));
+    case PageList::ConfigRecode:
+      return std::unique_ptr<IPage>(
+          new ConfigRecode(display, changer, button, recodeApp));
+      break;
     default:
       return nullptr;
   }
