@@ -91,6 +91,7 @@ void setup() {
       Serial.printf("MP3 done\n");
       Serial.println(millis() - timer);
       delay(1000);
+      mp3->
     }
     vTaskDelay(1);
   }

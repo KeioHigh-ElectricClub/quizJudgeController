@@ -9,7 +9,7 @@ MainPage::MainPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button,
 
 void MainPage::init() {
   // changer->changePage(PageList::Menu);
-  display->fillRect(37, 0, 320, 163, TFT_WHITE);
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   button->init();
   button->setEnableLongPush(true, false, false);
   footer->setMessage("リセット", "不正解", "正解");
