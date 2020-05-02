@@ -14,8 +14,10 @@ void Header::init() {
   display->drawFastHLine(0, 36, 320, frameColor);
   display->drawFastVLine(176, 0, 36, frameColor);
 
+  display->loadFont("YuGothic12");
   display->setTextDatum(TL_DATUM);
   display->drawString("まで", 286, 16);
+  display->unloadFont();
 
   canRecode = recodeApp->getCanRecoding();
   nowLimit = config->getLimit();

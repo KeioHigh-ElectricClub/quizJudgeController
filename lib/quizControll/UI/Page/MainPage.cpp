@@ -63,7 +63,7 @@ void MainPage::draw() {
   display->setTextColor(TFT_BLACK, TFT_WHITE);
   display->setTextPadding(88);
   if (respondentNum == 0xff) {
-    display->drawChar('-', 75, 61);
+    display->drawChar('22', 75, 61);
   } else {
     display->drawNumber(respondentNum, 75, 61);
   }

@@ -6,7 +6,7 @@ ConfigPage::ConfigPage(TFT_eSPI* display, IPageChange* changer,
   this->recodeApp = recodeApp;
 }
 void ConfigPage::init() {
-  display->fillRect(37, 0, 320, 163, TFT_WHITE);
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   button->init();
   button->setEnableLongPush(false, false, false);
   footer->init();
