@@ -48,7 +48,7 @@ void setup() {
   if (SPIFFS.exists("/YuGothic80.vlw") == false) Serial.println("no font");
 
   display.begin();
-  display.setRotation(0);
+  display.setRotation(1);
 
   PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
                           PageList::ConfigRecode};
