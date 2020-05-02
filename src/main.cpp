@@ -62,13 +62,14 @@ void setup() {
     manager.draw();
 
     Serial.println("end first draw");
+    delay(1000);
 
     for (byte i = 0; i < 3; i++) {
       manager.update();
       manager.changePage(pageArray[i]);
       manager.draw();
       Serial.println("draw");
-      vTaskDelay(0);
+      delay(1000);
     }
   } catch (const char* e) {
     Serial.println("exception");
