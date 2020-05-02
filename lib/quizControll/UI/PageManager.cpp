@@ -7,6 +7,7 @@ PageManager::PageManager(PageFactory& pageFactory, PartsFactory& partsFactory,
 }
 
 void PageManager::init() {
+  display->fillScreen(TFT_WHITE);
   header = partsFactory.create(PartsList::Header);
   if (header == nullptr) throw "Failed to initialize Header";
   nowPage = pageFactory.create(PageList::Main, this);

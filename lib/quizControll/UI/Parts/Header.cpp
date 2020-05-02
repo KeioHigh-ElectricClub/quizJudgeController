@@ -8,6 +8,8 @@ Header::Header(TFT_eSPI* display, RecodeApplicationService* recodeApp,
 }
 
 void Header::init() {
+  display->fillRect(0,0,320,36,TFT_WHITE);
+
   uint32_t frameColor = display->color24to16(0x707070);
   display->drawFastHLine(0, 36, 320, frameColor);
   display->drawFastVLine(176, 0, 36, frameColor);
