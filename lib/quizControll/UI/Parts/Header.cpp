@@ -8,15 +8,14 @@ Header::Header(TFT_eSPI* display, RecodeApplicationService* recodeApp,
 }
 
 void Header::init() {
-  display->fillRect(0,0,320,36,TFT_WHITE);
+  display->fillRect(0, 0, 320, 36, TFT_WHITE);
 
   uint32_t frameColor = display->color24to16(0x707070);
   display->drawFastHLine(0, 36, 320, frameColor);
   display->drawFastVLine(176, 0, 36, frameColor);
 
   display->setTextDatum(TL_DATUM);
-  display->setCursor(286, 16);
-  display->drawString("まで", 186, 16);
+  display->drawString("まで", 286, 16);
 
   canRecode = recodeApp->getCanRecoding();
   nowLimit = config->getLimit();
@@ -63,7 +62,7 @@ void Header::draw() {
       break;
   }
 
-  display->setTextDatum(TL_DATUM);
+  display->setTextDatum(TR_DATUM);
   display->setTextPadding(42);
   display->setTextColor(TFT_BLACK, TFT_WHITE);
   display->drawString(limit, 285, 6);

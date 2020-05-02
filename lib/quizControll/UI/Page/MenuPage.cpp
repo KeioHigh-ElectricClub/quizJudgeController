@@ -115,8 +115,8 @@ void MenuPage::draw() {
   }
 }
 
-uint32_t MenuPage::frameColor(int postionIndex) {
-  return (this->positionIndex == positionIndex)
+uint32_t MenuPage::frameColor(int positionIndexA) {
+  return (this->positionIndex == positionIndexA)
              ? TFT_RED
              : display->color24to16(0x707070);
 }
