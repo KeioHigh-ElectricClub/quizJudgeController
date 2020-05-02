@@ -66,6 +66,9 @@ void setup() {
 
   xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
 
+  display.begin();
+  display.setRotation(0);
+
   PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
                           PageList::ConfigRecode};
 
