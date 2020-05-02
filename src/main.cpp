@@ -1,5 +1,4 @@
 #ifndef UNIT_TEST
-
 #include <Arduino.h>
 #include <SPIFFS.h>
 
@@ -24,8 +23,19 @@ PageFactory pageFactory(&display, &recodeService, &config, &button);
 PartsFactory partsFactory(&display, &recodeService, &config, &button);
 PageManager manager(pageFactory, partsFactory, &display);
 
+#include <AudioFileSourceSPIFFS.h>
+#include <AudioGeneratorMP3.h>
+#include <AudioOutputI2SNoDAC.h>
+
+AudioFileSourceSPIFFS *hoge, *fuga;
+AudioGeneratorMP3* mp3;
+AudioOutputI2SNoDAC* i2s;
+
 void setup() {
   Serial.begin(115200);
+
+  Serial.println("start");
+
   if (!SPIFFS.begin()) {
     Serial.println("SPIFFS initialisation failed!");
     while (1) yield();  // Stay here twiddling thumbs waiting
@@ -37,7 +47,8 @@ void setup() {
   if (SPIFFS.exists("/YuGothic12.vlw") == false) Serial.println("no font");
   if (SPIFFS.exists("/YuGothic80.vlw") == false) Serial.println("no font");
 
-  // xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
+  display.begin();
+  display.setRotation(0);
 
   PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
                           PageList::ConfigRecode};
@@ -65,6 +76,23 @@ void setup() {
   }
 
   Serial.println("end");
+
+  hoge = new AudioFileSourceSPIFFS("/hoge.mp3");
+  i2s = new AudioOutputI2SNoDAC();
+  mp3 = new AudioGeneratorMP3();
+
+  unsigned long timer = millis();
+  mp3->begin(hoge, i2s);
+  while (true) {
+    if (mp3->isRunning()) {
+      if (!mp3->loop()) mp3->stop();
+    } else {
+      Serial.printf("MP3 done\n");
+      Serial.println(millis() - timer);
+      delay(1000);
+    }
+    vTaskDelay(1);
+  }
 }
 void loop() {}
 
