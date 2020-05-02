@@ -12,7 +12,7 @@ MenuPage::MenuPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button)
 
 void MenuPage::init() {
   button->init();
-  footer->setMessage("決定", "◀", "▶");
+  footer->setMessage("決定", "<", ">");
   button->setEnableLongPush(false, false, false);
 
   display->fillRect(37, 0, 320, 163, TFT_WHITE);

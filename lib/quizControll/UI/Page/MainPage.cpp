@@ -18,7 +18,7 @@ void MainPage::init() {
   display->loadFont("YuGothic20");
 
   display->setTextDatum(TC_DATUM);
-  display->drawString("人　回答中", 197, 61);
+  display->drawString("人回答中", 197, 61);
 
   display->setCursor(45, 151);
   display->drawString("回答中", 45, 151);
@@ -28,6 +28,7 @@ void MainPage::init() {
   display->unloadFont();
 
   display->loadFont("YuGothic12");
+  display->setTextDatum(TL_DATUM);
   display->drawString("リセット長押しでメニュー", 168, 173);
   display->unloadFont();
 

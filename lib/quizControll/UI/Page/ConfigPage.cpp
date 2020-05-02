@@ -10,7 +10,7 @@ void ConfigPage::init() {
   button->init();
   button->setEnableLongPush(false, false, false);
   footer->init();
-  footer->setMessage("決定", "◀", "▶");
+  footer->setMessage("決定", "<", ">");
 
   draw();
 }
