@@ -11,6 +11,7 @@ void PageManager::init() {
   if (header == nullptr) throw "Failed to initialize Header";
   nowPage = pageFactory.create(PageList::Main, this);
   if (nowPage == nullptr) throw "Failed to initialize main";
+
   header->init();
   nowPage->init();
 }

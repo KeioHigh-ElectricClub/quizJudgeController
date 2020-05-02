@@ -39,7 +39,7 @@ void ConfigPage::draw() {
   const int frameColor = display->color24to16(0x707070);
   const int fillColor = display->color24to16(0xf3f3f3);
 
-  // display->loadFont("YuGothic20");
+  display->loadFont("YuGothic20");
   for (byte i = 0; i < items.size(); i++) {
     int xpos = rowXpos[i % 2];
     int ypos = colomnYpos[i / 2];
@@ -49,13 +49,13 @@ void ConfigPage::draw() {
     display->drawRect(xpos, ypos, itemWidth, itemHeight, frameColor);
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
-    // display->drawString(items[i].name, xpos + itemWidth / 2,
-    // ypos + itemHeight / 2);
+    display->drawString(items[i].name, xpos + itemWidth / 2,
+                        ypos + itemHeight / 2);
   }
   display->unloadFont();
 }
 void ConfigPage::drawTitle(String title) {
-  // display->loadFont("YuGothic20");
+  display->loadFont("YuGothic20");
   display->setTextDatum(TL_DATUM);
-  // display->drawString(title, 10, 43);
+  display->drawString(title, 10, 43);
 }

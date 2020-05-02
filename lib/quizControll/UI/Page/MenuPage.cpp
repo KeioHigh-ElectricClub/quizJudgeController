@@ -85,7 +85,7 @@ void MenuPage::onRightPushed() {
 void MenuPage::draw() {
   if (!mustUpdate) return;
 
-  // display->loadFont("YuGothic20");
+  display->loadFont("YuGothic20");
 
   for (int i = 0; i < 2; i++) {
     if (items[pageIndex][i].name == ignoreItem) continue;
@@ -99,7 +99,7 @@ void MenuPage::draw() {
 
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
-    // display->drawString(items[pageIndex][i].name, 99, 120);
+    display->drawString(items[pageIndex][i].name, 99, 120);
   }
   display->unloadFont();
 
