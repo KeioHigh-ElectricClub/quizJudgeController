@@ -13,6 +13,8 @@ void MainPage::init() {
   button->setEnableLongPush(true, false, false);
   footer->setMessage("リセット", "不正解", "正解");
 
+  display->fillRect(37, 0, 320, 163, TFT_WHITE);
+
   display->loadFont("YuGothic20");
 
   display->setTextDatum(TC_DATUM);

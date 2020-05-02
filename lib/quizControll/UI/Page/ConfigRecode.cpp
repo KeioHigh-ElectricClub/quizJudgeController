@@ -19,6 +19,7 @@ ConfigRecode::ConfigRecode(TFT_eSPI* display, IPageChange* changer,
 }
 
 void ConfigRecode::init() {
+  display->fillRect(37, 0, 320, 163, TFT_WHITE);
   ConfigPage::init();
   drawTitle("記録");
 }

@@ -15,6 +15,8 @@ void MenuPage::init() {
   footer->setMessage("決定", "◀", "▶");
   button->setEnableLongPush(false, false, false);
 
+  display->fillRect(37, 0, 320, 163, TFT_WHITE);
+
   items[0][0] = {"戻る", [this]() { changer->changePage(PageList::Main); }};
   items[0][1] = {"判定\n人数",
                  [this]() { changer->changePage(PageList::ConfigLimit); }};

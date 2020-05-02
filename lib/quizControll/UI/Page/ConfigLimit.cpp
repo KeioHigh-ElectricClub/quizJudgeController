@@ -26,6 +26,7 @@ ConfigLimit::ConfigLimit(TFT_eSPI* display, IPageChange* changer,
 }
 
 void ConfigLimit::init() {
+  display->fillRect(37, 0, 320, 163, TFT_WHITE);
   ConfigPage::init();
   drawTitle("判定人数");
 }
