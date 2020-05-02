@@ -12,7 +12,7 @@
 #include "UI/PartsFactory.h"
 #include "infrastructure/Button/ButtonInput.h"
 
-TFT_eSPI display(320, 240);
+TFT_eSPI display(240, 320);
 
 TestRepository repository;
 TestJudgeOutput judgeOutput;
