@@ -11,7 +11,7 @@ void ConfigPage::init() {
   button->setEnableLongPush(false, false, false);
   footer->init();
   footer->setMessage("決定", "<", ">");
-
+  mustUpdate = true;
   draw();
 }
 void ConfigPage::update() {
@@ -54,6 +54,8 @@ void ConfigPage::draw() {
                         ypos + itemHeight / 2);
   }
   display->unloadFont();
+
+  mustUpdate = false;
 }
 void ConfigPage::drawTitle(String title) {
   display->loadFont("YuGothic20");
