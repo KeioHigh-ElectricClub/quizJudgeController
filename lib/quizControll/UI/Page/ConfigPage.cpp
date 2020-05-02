@@ -59,4 +59,5 @@ void ConfigPage::drawTitle(String title) {
   display->loadFont("YuGothic20");
   display->setTextDatum(TL_DATUM);
   display->drawString(title, 10, 43);
+  display->unloadFont();
 }

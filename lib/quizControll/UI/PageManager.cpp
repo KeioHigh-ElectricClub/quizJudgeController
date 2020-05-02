@@ -18,7 +18,6 @@ void PageManager::init() {
 }
 void PageManager::update() {
   header->update();
-
   nowPage->update();
 }
 void PageManager::draw() {

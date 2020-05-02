@@ -18,7 +18,7 @@ void MenuPage::init() {
   display->fillRect(37, 0, 320, 163, TFT_WHITE);
 
   items[0][0] = {"戻る", [this]() { changer->changePage(PageList::Main); }};
-  items[0][1] = {"判定\n人数",
+  items[0][1] = {"人数",
                  [this]() { changer->changePage(PageList::ConfigLimit); }};
   items[1][0] = {"記録",
                  [this]() { changer->changePage(PageList::ConfigRecode); }};
