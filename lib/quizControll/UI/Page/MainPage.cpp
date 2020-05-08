@@ -9,14 +9,15 @@ MainPage::MainPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button,
 
 void MainPage::init() {
   // changer->changePage(PageList::Menu);
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   button->init();
   button->setEnableLongPush(true, false, false);
   footer->setMessage("リセット", "不正解", "正解");
 
   display->loadFont("YuGothic20");
 
-  display->setTextDatum(TC_DATUM);
-  display->drawString("人　回答中", 197, 61);
+  display->setTextDatum(TL_DATUM);
+  display->drawString("人回答中", 197, 61);
 
   display->setCursor(45, 151);
   display->drawString("回答中", 45, 151);
@@ -26,6 +27,7 @@ void MainPage::init() {
   display->unloadFont();
 
   display->loadFont("YuGothic12");
+  display->setTextDatum(TL_DATUM);
   display->drawString("リセット長押しでメニュー", 168, 173);
   display->unloadFont();
 
@@ -61,7 +63,7 @@ void MainPage::draw() {
   display->setTextColor(TFT_BLACK, TFT_WHITE);
   display->setTextPadding(88);
   if (respondentNum == 0xff) {
-    display->drawChar('-', 75, 61);
+    display->drawString("-", 75, 61);
   } else {
     display->drawNumber(respondentNum, 75, 61);
   }
@@ -72,6 +74,7 @@ void MainPage::draw() {
   display->setTextPadding(22);
   display->drawNumber(waiting, 196, 61);
   display->unloadFont();
+  display->setTextPadding(12);
 
   mustUpdate = false;
 }

@@ -6,11 +6,12 @@ ConfigPage::ConfigPage(TFT_eSPI* display, IPageChange* changer,
   this->recodeApp = recodeApp;
 }
 void ConfigPage::init() {
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   button->init();
   button->setEnableLongPush(false, false, false);
   footer->init();
-  footer->setMessage("決定", "◀", "▶");
-
+  footer->setMessage("決定", "<", ">");
+  mustUpdate = true;
   draw();
 }
 void ConfigPage::update() {
@@ -53,9 +54,12 @@ void ConfigPage::draw() {
                         ypos + itemHeight / 2);
   }
   display->unloadFont();
+
+  mustUpdate = false;
 }
 void ConfigPage::drawTitle(String title) {
   display->loadFont("YuGothic20");
   display->setTextDatum(TL_DATUM);
   display->drawString(title, 10, 43);
+  display->unloadFont();
 }

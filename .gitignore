@@ -3,9 +3,3 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
-
-!/lib/*
-/lib/TFT_eSPI/*
-!/lib/TFT_eSPI/User_Setup.h
-
-

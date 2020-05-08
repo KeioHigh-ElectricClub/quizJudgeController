@@ -12,17 +12,17 @@ MenuPage::MenuPage(TFT_eSPI* display, IPageChange* changer, ButtonInput* button)
 
 void MenuPage::init() {
   button->init();
-  footer->setMessage("決定", "◀", "▶");
+  footer->setMessage("決定", "<", ">");
   button->setEnableLongPush(false, false, false);
 
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
+
   items[0][0] = {"戻る", [this]() { changer->changePage(PageList::Main); }};
-  items[0][1] = {"判定\n人数",
+  items[0][1] = {"人数",
                  [this]() { changer->changePage(PageList::ConfigLimit); }};
   items[1][0] = {"記録",
                  [this]() { changer->changePage(PageList::ConfigRecode); }};
   items[1][1] = {ignoreItem, []() {}};
-
-  display->fillRect(37, 0, 162, 320, TFT_WHITE);
 
   draw();
 }
@@ -99,7 +99,7 @@ void MenuPage::draw() {
 
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
-    display->drawString(items[pageIndex][i].name, 99, 120);
+    display->drawString(items[pageIndex][i].name, posX + 52, 120);
   }
   display->unloadFont();
 
@@ -113,8 +113,8 @@ void MenuPage::draw() {
   }
 }
 
-uint32_t MenuPage::frameColor(int postionIndex) {
-  return (this->positionIndex == positionIndex)
+uint32_t MenuPage::frameColor(int positionIndexA) {
+  return (this->positionIndex == positionIndexA)
              ? TFT_RED
              : display->color24to16(0x707070);
 }

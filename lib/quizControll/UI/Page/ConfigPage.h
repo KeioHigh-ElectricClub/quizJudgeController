@@ -28,7 +28,7 @@ class ConfigPage : public IPage {
   int rowXpos[2] = {41, 175};
   int colomnYpos[2] = {82, 142};
   const int itemWidth = 104;
-  const int itemHeight = 82;
+  const int itemHeight = 42;
 
   void drawTitle(String title);
 
