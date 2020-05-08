@@ -25,16 +25,18 @@ PageManager manager(pageFactory, partsFactory, &display);
 
 #include <AudioFileSourceSPIFFS.h>
 #include <AudioGeneratorMP3.h>
-#include <AudioOutputI2SNoDAC.h>
+#include <AudioOutputI2S.h>
 
 AudioFileSourceSPIFFS *hoge, *fuga;
 AudioGeneratorMP3* mp3;
-AudioOutputI2SNoDAC* i2s;
+AudioOutputI2S* i2s;
 
 void task0(void* d) {
   hoge = new AudioFileSourceSPIFFS("/hoge.mp3");
-  i2s = new AudioOutputI2SNoDAC();
+  i2s = new AudioOutputI2S(0, 1);
   mp3 = new AudioGeneratorMP3();
+
+  Serial.println("music start");
 
   unsigned long timer = millis();
   mp3->begin(hoge, i2s);
