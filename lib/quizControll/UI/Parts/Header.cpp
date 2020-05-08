@@ -12,10 +12,11 @@ void Header::init() {
 
   uint32_t frameColor = display->color24to16(0x707070);
   display->drawFastHLine(0, 36, 320, frameColor);
-  display->drawFastVLine(176, 0, 36, frameColor);
+  display->drawFastVLine(150, 0, 36, frameColor);
 
   display->loadFont("YuGothic12");
   display->setTextDatum(TL_DATUM);
+  display->setTextColor(TFT_BLACK);
   display->drawString("まで", 286, 16);
   display->unloadFont();
 
