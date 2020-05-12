@@ -28,6 +28,7 @@ void MenuPage::init() {
 }
 
 void MenuPage::update() {
+  Serial.println("menu update");
   button->update();
 
   if (button->isLeftPushed()) {

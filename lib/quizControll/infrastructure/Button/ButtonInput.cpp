@@ -37,7 +37,7 @@ void ButtonInput::update() {
         isButtonPushed[i] = true;
       }
     }
-    Serial.printf("id:%d,prev:%d,long:%d,is:%d", i, prevPagePushedButton[i],
+    Serial.printf("id:%d,prev:%d,long:%d,is:%d\n", i, prevPagePushedButton[i],
                   prevPushedButtonLong[i], isButtonPushed[i]);
   }
 }
