@@ -43,14 +43,11 @@ void MainPage::update() {
   button->update();
   if (button->isLeftPushedLong()) {
     changer->changePage(PageList::Menu);
-  }
-  if (button->isLeftPushed()) {
+  } else if (button->isLeftPushed()) {
     recodeApp->reset();
-  }
-  if (button->isCenterPushed()) {
+  } else if (button->isCenterPushed()) {
     recodeApp->showIncorrect();
-  }
-  if (button->isRightPushed()) {
+  } else if (button->isRightPushed()) {
     recodeApp->showCorrect();
   }
 

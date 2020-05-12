@@ -68,7 +68,7 @@ void setup() {
   if (SPIFFS.exists("/YuGothic12.vlw") == false) Serial.println("no font");
   if (SPIFFS.exists("/YuGothic80.vlw") == false) Serial.println("no font");
 
-  xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
+  // xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
 
   display.begin();
   display.setRotation(1);
