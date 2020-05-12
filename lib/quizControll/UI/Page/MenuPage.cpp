@@ -28,6 +28,8 @@ void MenuPage::init() {
 }
 
 void MenuPage::update() {
+  button->update();
+
   if (button->isLeftPushed()) {
     onLeftPushed();
     mustUpdate = true;

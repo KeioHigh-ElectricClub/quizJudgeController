@@ -15,6 +15,8 @@ void ConfigPage::init() {
   draw();
 }
 void ConfigPage::update() {
+  button->update();
+
   if (button->isLeftPushed()) {
     items[positionIndex].func();
     return;

@@ -40,6 +40,7 @@ void MainPage::init() {
   Serial.println(micros() - timer);
 }
 void MainPage::update() {
+  button->update();
   if (button->isLeftPushedLong()) {
     changer->changePage(PageList::Menu);
   }
