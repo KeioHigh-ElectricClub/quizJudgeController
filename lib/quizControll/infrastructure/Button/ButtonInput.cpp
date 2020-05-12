@@ -1,6 +1,6 @@
 #include "ButtonInput.h"
 
-const uint8_t ButtonInput::buttonPin[] = {32, 34, 35};
+const uint8_t ButtonInput::buttonPin[] = {34, 35, 32};
 
 ButtonInput::ButtonInput() {
   for (byte i = 0; i < 3; i++) {

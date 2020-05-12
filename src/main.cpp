@@ -73,34 +73,19 @@ void setup() {
   display.begin();
   display.setRotation(1);
 
-  PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
-                          PageList::ConfigRecode};
+  manager.init();
 
-  button.init();
-
+  Serial.println("end");
+}
+void loop() {
   try {
-    manager.init();
-
     manager.update();
     manager.draw();
-
-    Serial.println("end first draw");
-    delay(5000);
-
-    for (byte i = 0; i < 3; i++) {
-      manager.update();
-      manager.changePage(pageArray[i]);
-      manager.draw();
-      Serial.println("draw");
-      delay(5000);
-    }
   } catch (const char* e) {
     Serial.println("exception");
     Serial.println(e);
   }
-
-  Serial.println("end");
+  delay(50);
 }
-void loop() {}
 
 #endif
