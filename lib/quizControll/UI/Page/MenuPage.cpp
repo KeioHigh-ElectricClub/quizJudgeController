@@ -113,6 +113,7 @@ void MenuPage::draw() {
     uint32_t triangleColor = frameColor(2);
     display->drawTriangle(291, 105, 317, 120, 291, 135, triangleColor);
   }
+  mustUpdate = false;
 }
 
 uint32_t MenuPage::frameColor(int positionIndexA) {

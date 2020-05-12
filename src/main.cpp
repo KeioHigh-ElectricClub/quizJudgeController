@@ -87,8 +87,6 @@ void loop() {
     Serial.println(e);
   }
   delay(50);
-  Serial.println("draw");
-  Serial.printf("leftIsLongPush: %d", button.isLeftPushedLong());
 }
 
 #endif

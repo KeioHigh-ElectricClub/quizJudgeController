@@ -33,11 +33,12 @@ void ButtonInput::update() {
       if (prevPushedButtonLong[i] || prevPagePushedButton[i]) {
         prevPushedButtonLong[i] = false;
         prevPagePushedButton[i] = false;
-        return;
+      } else {
+        isButtonPushed[i] = true;
       }
-      isButtonPushed[i] = true;
-      return;
     }
+    Serial.printf("id:%d,prev:%d,long:%d,is:%d", i, prevPagePushedButton[i],
+                  prevPushedButtonLong[i], isButtonPushed[i]);
   }
 }
 
