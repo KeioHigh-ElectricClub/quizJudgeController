@@ -73,6 +73,7 @@ void setup() {
   display.begin();
   display.setRotation(1);
 
+  button.init();
   manager.init();
 
   Serial.println("end");
