@@ -33,7 +33,7 @@ AudioOutputI2S* i2s;
 
 void task0(void* d) {
   hoge = new AudioFileSourceSPIFFS("/hoge.mp3");
-  i2s = new AudioOutputI2S(0, 1);
+  i2s = new AudioOutputI2S(0, 2);
   mp3 = new AudioGeneratorMP3();
 
   Serial.println("music start");
