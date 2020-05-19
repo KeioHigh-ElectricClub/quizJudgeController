@@ -49,8 +49,10 @@ void MainPage::update() {
     recodeApp->reset();
   } else if (button->isCenterPushed()) {
     recodeApp->showIncorrect();
+    soundPlay(Sound::INCORRECT);
   } else if (button->isRightPushed()) {
     recodeApp->showCorrect();
+    soundPlay(Sound::CORRECT);
   }
   Serial.println("main update");
 }
