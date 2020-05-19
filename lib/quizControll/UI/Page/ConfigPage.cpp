@@ -44,6 +44,7 @@ void ConfigPage::draw() {
   if (!mustUpdate) return;
 
   const int frameColor = display->color24to16(0x707070);
+  const int selectColor = display->color24to16(0x707070);
   const int fillColor = display->color24to16(0xf3f3f3);
 
   display->loadFont("YuGothic20");
@@ -53,7 +54,8 @@ void ConfigPage::draw() {
 
     display->fillRect(xpos + 1, ypos + 1, itemWidth - 2, itemHeight - 2,
                       fillColor);
-    display->drawRect(xpos, ypos, itemWidth, itemHeight, frameColor);
+    display->drawRect(xpos, ypos, itemWidth, itemHeight,
+                      (i == positionIndex) ? selectColor : frameColor);
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
     display->drawString(items[i].name, xpos + itemWidth / 2,
