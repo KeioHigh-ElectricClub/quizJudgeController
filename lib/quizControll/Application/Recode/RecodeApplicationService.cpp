@@ -1,7 +1,7 @@
 #include "Application/Recode/RecodeApplicationService.h"
 
 RecodeApplicationService::RecodeApplicationService(
-    IControllJudgeOutput& controller, IResultRepository& _resultRepository)
+    IControllJudgeOutput& controller, IResultRepository& resultRepository)
     : resultRepository(resultRepository), controller(controller) {}
 
 void RecodeApplicationService::createAnswerRight(byte respondentNum,

@@ -23,7 +23,10 @@ void ConfigPage::update() {
   }
   if (button->isCenterPushed()) {
     mustUpdate = true;
-    if (positionIndex == 0) return;
+    if (positionIndex <= 0) {
+      positionIndex = 0;
+      return;
+    }
     positionIndex--;
   }
   if (button->isRightPushed()) {
@@ -34,6 +37,7 @@ void ConfigPage::update() {
     }
     positionIndex++;
   }
+  Serial.printf("position: %d\n", positionIndex);
 }
 
 void ConfigPage::draw() {

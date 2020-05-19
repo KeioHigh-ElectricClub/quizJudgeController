@@ -41,6 +41,8 @@ void MainPage::init() {
 }
 void MainPage::update() {
   button->update();
+
+  mustUpdate = getData();
   if (button->isLeftPushedLong()) {
     changer->changePage(PageList::Menu);
   } else if (button->isLeftPushed()) {
@@ -50,8 +52,7 @@ void MainPage::update() {
   } else if (button->isRightPushed()) {
     recodeApp->showCorrect();
   }
-
-  mustUpdate = getData();
+  Serial.println("main update");
 }
 void MainPage::draw() {
   if (!mustUpdate) return;

@@ -32,20 +32,25 @@ void MenuPage::update() {
   button->update();
 
   if (button->isLeftPushed()) {
+    Serial.println("left pushed");
     onLeftPushed();
     mustUpdate = true;
     return;
   }
   if (button->isCenterPushed()) {
+    Serial.println("center pushed");
     onCenterPushed();
     mustUpdate = true;
     return;
   }
   if (button->isRightPushed()) {
+    Serial.println("right pushed");
     onRightPushed();
     mustUpdate = true;
     return;
   }
+  Serial.println("menu update end");
+  Serial.printf("position: %d, page: %d\n", positionIndex, pageIndex);
 }
 
 void MenuPage::onLeftPushed() {
@@ -55,6 +60,7 @@ void MenuPage::onLeftPushed() {
       return;
     };
     pageIndex--;
+    positionIndex = 2;
     return;
   } else if (positionIndex == 2) {
     if (pageIndex == MAX_PAGE - 1) {
@@ -62,6 +68,7 @@ void MenuPage::onLeftPushed() {
       return;
     }
     pageIndex++;
+    positionIndex = 0;
     return;
   }
   if (items[pageIndex][positionIndex].name == ignoreItem) {
@@ -86,6 +93,7 @@ void MenuPage::onRightPushed() {
 }
 
 void MenuPage::draw() {
+  Serial.println("draw");
   if (!mustUpdate) return;
 
   display->loadFont("YuGothic20");

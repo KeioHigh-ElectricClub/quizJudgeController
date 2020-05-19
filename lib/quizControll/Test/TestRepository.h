@@ -12,6 +12,7 @@ class TestRepository : public IResultRepository {
   TestRepository() {}
   ~TestRepository() {}
   bool init() {
+    Serial.println("repository init");
     storage.clear();
     return true;
   }

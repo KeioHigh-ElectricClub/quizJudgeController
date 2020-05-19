@@ -8,18 +8,18 @@ ConfigLimit::ConfigLimit(TFT_eSPI* display, IPageChange* changer,
 
   items.push_back({"1位", [this]() {
                      this->config->setLimit(Limit::UNTIL1);
-                     this->changer->changePage(PageList::Main);
                      this->recodeApp->reset();
+                     this->changer->changePage(PageList::Main);
                    }});
   items.push_back({"2位", [this]() {
                      this->config->setLimit(Limit::UNTIL2);
-                     this->changer->changePage(PageList::Main);
                      this->recodeApp->reset();
+                     this->changer->changePage(PageList::Main);
                    }});
   items.push_back({"20位", [this]() {
                      this->config->setLimit(Limit::UNTIL20);
-                     this->changer->changePage(PageList::Main);
                      this->recodeApp->reset();
+                     this->changer->changePage(PageList::Main);
                    }});
   items.push_back(
       {"戻る", [this]() { this->changer->changePage(PageList::Menu); }});
