@@ -32,7 +32,7 @@ void Header::update() {
   canRecode = recodeApp->getCanRecoding();
   nowLimit = config->getLimit();
 
-  if (canRecode != canRecodeTmp && nowLimit != nowLimitTmp) mustUpdate = true;
+  if (canRecode != canRecodeTmp || nowLimit != nowLimitTmp) mustUpdate = true;
 }
 
 void Header::draw() {
