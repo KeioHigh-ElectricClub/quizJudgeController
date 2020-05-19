@@ -44,6 +44,7 @@ void ConfigPage::draw() {
   if (!mustUpdate) return;
 
   const int frameColor = display->color24to16(0x707070);
+  const int selectColor = display->color24to16(0x707070);
   const int fillColor = display->color24to16(0xf3f3f3);
 
   display->loadFont("YuGothic20");
