@@ -53,7 +53,8 @@ void ConfigPage::draw() {
 
     display->fillRect(xpos + 1, ypos + 1, itemWidth - 2, itemHeight - 2,
                       fillColor);
-    display->drawRect(xpos, ypos, itemWidth, itemHeight, frameColor);
+    display->drawRect(xpos, ypos, itemWidth, itemHeight,
+                      (i == positionIndex) ? TFT_RED : frameColor);
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
     display->drawString(items[i].name, xpos + itemWidth / 2,
