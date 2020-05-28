@@ -1,17 +1,20 @@
 #include "ButtonInput.h"
 
-const uint8_t ButtonInput::buttonPin[] = {32, 34, 35};
+const uint8_t ButtonInput::buttonPin[] = {14, 12, 13};
 
 ButtonInput::ButtonInput() {
   for (byte i = 0; i < 3; i++) {
-    btns[i] = std::unique_ptr<Button>(new Button(buttonPin[i]));
+    btns[i] = std::unique_ptr<Button>(new Button(buttonPin[i], 25, true, true));
   }
 }
 
 void ButtonInput::init() {
   for (byte i = 0; i < 3; i++) {
     btns[i]->begin();
-    if (btns[i]->isPressed()) prevPagePushedButton[i] = true;
+    isButtonPushed[i] = false;
+    isButtonLongPushed[i] = false;
+    prevPushedButtonLong[i] = false;
+    prevPagePushedButton[i] = btns[i]->isPressed();
   }
 }
 
@@ -26,18 +29,23 @@ void ButtonInput::update() {
     btns[i]->read();
 
     if (isEnableLongPush[i] && btns[i]->pressedFor(1000)) {
-      if (prevPagePushedButton[i]) return;
+      if (prevPagePushedButton[i]) continue;
       isButtonLongPushed[i] = true;
       prevPushedButtonLong[i] = true;
     } else if (btns[i]->wasReleased()) {
       if (prevPushedButtonLong[i] || prevPagePushedButton[i]) {
         prevPushedButtonLong[i] = false;
         prevPagePushedButton[i] = false;
-        return;
+      } else {
+        isButtonPushed[i] = true;
       }
-      isButtonPushed[i] = true;
-      return;
     }
+    // Serial.printf(
+    //     "id:%d,prev:%d,isLong:%d,isButtonPushed:%d,wasReleased:%d,pressedFor:%"
+    //     "d \n",
+    //     i, prevPagePushedButton[i], prevPushedButtonLong[i],
+    //     isButtonPushed[i], btns[i]->wasReleased(),
+    //     btns[i]->pressedFor(1000));
   }
 }
 

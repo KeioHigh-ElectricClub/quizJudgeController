@@ -6,6 +6,7 @@ Footer::Footer(TFT_eSPI* display, ButtonInput* button) {
 }
 
 void Footer::init() {
+  display->fillRect(0, 200, 320, 40, TFT_WHITE);
   uint32_t frameColor = display->color24to16(0x707070);
   display->drawFastHLine(0, 200, 320, frameColor);
   display->drawFastVLine(106, 200, 40, frameColor);
@@ -13,6 +14,9 @@ void Footer::init() {
 }
 
 void Footer::setMessage(String left, String center, String right) {
+  display->fillRect(0, 200, 320, 40, TFT_WHITE);
+
+  init();
   display->loadFont("YuGothic20");
   display->setCursor(53, 208);
   display->setTextDatum(TC_DATUM);

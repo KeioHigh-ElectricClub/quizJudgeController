@@ -1,5 +1,4 @@
 #ifndef UNIT_TEST
-
 #include <Arduino.h>
 #include <SPIFFS.h>
 
@@ -12,8 +11,9 @@
 #include "UI/PageManager.h"
 #include "UI/PartsFactory.h"
 #include "infrastructure/Button/ButtonInput.h"
+#include "infrastructure/Sound/Sound.h"
 
-TFT_eSPI display(320, 240);
+TFT_eSPI display(240, 320);
 
 TestRepository repository;
 TestJudgeOutput judgeOutput;
@@ -26,46 +26,39 @@ PageManager manager(pageFactory, partsFactory, &display);
 
 void setup() {
   Serial.begin(115200);
+
+  Serial.println("start");
+
   if (!SPIFFS.begin()) {
     Serial.println("SPIFFS initialisation failed!");
-    while (1) yield();  // Stay here twiddling thumbs waiting
+    while (1) {
+    }
   }
   Serial.println("\r\nSPIFFS available!");
 
-  // ESP32 will crash if any of the fonts are missing
-  if (SPIFFS.exists("/YuGothic20.vlw") == false) Serial.println("no font");
-  if (SPIFFS.exists("/YuGothic12.vlw") == false) Serial.println("no font");
-  if (SPIFFS.exists("/YuGothic80.vlw") == false) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic20.vlw")) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic12.vlw")) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic80.vlw")) Serial.println("no font");
 
-  // xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
+  soundSetup();
 
-  PageList pageArray[] = {PageList::Menu, PageList::ConfigLimit,
-                          PageList::ConfigRecode};
+  display.begin();
+  display.setRotation(1);
 
   button.init();
+  manager.init();
 
+  Serial.println("end");
+}
+void loop() {
   try {
-    manager.init();
-
     manager.update();
     manager.draw();
-
-    Serial.println("end first draw");
-
-    for (byte i = 0; i < 3; i++) {
-      manager.update();
-      manager.changePage(pageArray[i]);
-      manager.draw();
-      Serial.println("draw");
-      vTaskDelay(0);
-    }
   } catch (const char* e) {
     Serial.println("exception");
     Serial.println(e);
   }
-
-  Serial.println("end");
+  delay(50);
 }
-void loop() {}
 
 #endif

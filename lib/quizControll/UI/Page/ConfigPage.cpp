@@ -6,21 +6,27 @@ ConfigPage::ConfigPage(TFT_eSPI* display, IPageChange* changer,
   this->recodeApp = recodeApp;
 }
 void ConfigPage::init() {
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   button->init();
   button->setEnableLongPush(false, false, false);
   footer->init();
-  footer->setMessage("決定", "◀", "▶");
-
+  footer->setMessage("決定", "<", ">");
+  mustUpdate = true;
   draw();
 }
 void ConfigPage::update() {
+  button->update();
+
   if (button->isLeftPushed()) {
     items[positionIndex].func();
     return;
   }
   if (button->isCenterPushed()) {
     mustUpdate = true;
-    if (positionIndex == 0) return;
+    if (positionIndex <= 0) {
+      positionIndex = 0;
+      return;
+    }
     positionIndex--;
   }
   if (button->isRightPushed()) {
@@ -31,12 +37,14 @@ void ConfigPage::update() {
     }
     positionIndex++;
   }
+  Serial.printf("position: %d\n", positionIndex);
 }
 
 void ConfigPage::draw() {
   if (!mustUpdate) return;
 
   const int frameColor = display->color24to16(0x707070);
+  const int selectColor = display->color24to16(0x707070);
   const int fillColor = display->color24to16(0xf3f3f3);
 
   display->loadFont("YuGothic20");
@@ -46,16 +54,20 @@ void ConfigPage::draw() {
 
     display->fillRect(xpos + 1, ypos + 1, itemWidth - 2, itemHeight - 2,
                       fillColor);
-    display->drawRect(xpos, ypos, itemWidth, itemHeight, frameColor);
+    display->drawRect(xpos, ypos, itemWidth, itemHeight,
+                      (i == positionIndex) ? TFT_RED : frameColor);
     display->setTextDatum(CC_DATUM);
     display->setTextColor(TFT_BLACK);
     display->drawString(items[i].name, xpos + itemWidth / 2,
                         ypos + itemHeight / 2);
   }
   display->unloadFont();
+
+  mustUpdate = false;
 }
 void ConfigPage::drawTitle(String title) {
   display->loadFont("YuGothic20");
   display->setTextDatum(TL_DATUM);
   display->drawString(title, 10, 43);
+  display->unloadFont();
 }

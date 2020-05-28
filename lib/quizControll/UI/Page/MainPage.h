@@ -6,6 +6,7 @@
 #include "UI/IPage.h"
 #include "UI/Parts/Footer.h"
 #include "infrastructure/Button/ButtonInput.h"
+#include "infrastructure/Sound/Sound.h"
 
 class MainPage : public IPage {
  public:

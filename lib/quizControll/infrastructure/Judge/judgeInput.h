@@ -4,6 +4,7 @@
 #include <Wire.h>
 
 #include "Application/Recode/RecodeApplicationService.h"
+#include "infrastructure/Sound/Sound.h"
 
 class JudgeInput {
  public:

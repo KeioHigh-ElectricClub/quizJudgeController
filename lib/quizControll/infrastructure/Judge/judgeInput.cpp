@@ -12,6 +12,7 @@ void JudgeInput::begin() {
 void JudgeInput::update() {
   byte data = receive(0x52);
   if (data & 0x00000001) {
+    soundPlay(Sound::PUSH);
   }
   if (!(data & 0x00000010)) return;
   byte respondent = receive(0xAA);

@@ -12,7 +12,7 @@ SdRepository::SdRepository(byte cs, byte cd, byte wp) {
 bool SdRepository::init() {
   if (!(isConnected() || canWrite())) return false;
 
-  if (!SD.begin(cs, SPI, 24000000)) return false;
+  if (!SD.begin(cs, SPI, SD_SPEED)) return false;
   int counter = 1;
   while (true) {
     if (!SD.exists(createFileName(counter))) break;
@@ -52,7 +52,7 @@ bool SdRepository::store(std::unique_ptr<Result> result) {
 
 bool SdRepository::write(String data) {
   if (!(isConnected() || canWrite())) return false;
-  if (!SD.begin(cs, SPI, 24000000)) return false;
+  if (!SD.begin(cs, SPI, SD_SPEED)) return false;
   File file = SD.open(nowFileName, FILE_APPEND);
   file.println(data);
   file.close();
@@ -61,12 +61,9 @@ bool SdRepository::write(String data) {
 }
 
 String SdRepository::createFileName(int num) {
-  String fileName = "LOG";
-  if (num < 100) fileName += "0";
-  if (num < 10) fileName += "0";
-  fileName += num;
-  fileName += ".csv";
-  return fileName;
+  char buffer[15];
+  sprintf(buffer, "LOG%03d.csv", num);
+  return String(buffer);
 }
 
 bool SdRepository::isConnected() { return !digitalRead(cd); }
