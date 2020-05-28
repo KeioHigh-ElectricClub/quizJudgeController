@@ -9,6 +9,8 @@
 #include "domain/Recode/IResultRepository.h"
 #include "domain/Recode/Result.h"
 
+constexpr uint32_t SD_SPEED = 24000000;
+
 class SdRepository : public IResultRepository {
  public:
   SdRepository(byte cs, byte cd = 0xff, byte wp = 0xff);

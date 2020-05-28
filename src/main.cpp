@@ -31,14 +31,14 @@ void setup() {
 
   if (!SPIFFS.begin()) {
     Serial.println("SPIFFS initialisation failed!");
-    while (1) yield();  // Stay here twiddling thumbs waiting
+    while (1) {
+    }
   }
   Serial.println("\r\nSPIFFS available!");
 
-  // ESP32 will crash if any of the fonts are missing
-  if (SPIFFS.exists("/YuGothic20.vlw") == false) Serial.println("no font");
-  if (SPIFFS.exists("/YuGothic12.vlw") == false) Serial.println("no font");
-  if (SPIFFS.exists("/YuGothic80.vlw") == false) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic20.vlw")) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic12.vlw")) Serial.println("no font");
+  if (!SPIFFS.exists("/YuGothic80.vlw")) Serial.println("no font");
 
   soundSetup();
 
