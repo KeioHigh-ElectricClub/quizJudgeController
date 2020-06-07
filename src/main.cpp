@@ -5,6 +5,7 @@
 #include "Application/Config/Config.h"
 #include "Application/Recode/RecodeApplicationService.h"
 #include "TFT_eSPI.h"
+#include "Test/TestJudgeInput.h"
 #include "Test/TestJudgeOutput.h"
 #include "Test/TestRepository.h"
 #include "UI/PageFactory.h"
@@ -23,7 +24,7 @@ ButtonInput button;
 PageFactory pageFactory(&display, &recodeService, &config, &button);
 PartsFactory partsFactory(&display, &recodeService, &config, &button);
 PageManager manager(pageFactory, partsFactory, &display);
-
+TestJudgeInput judgeInput(27, recodeService);
 void setup() {
   Serial.begin(115200);
 
@@ -52,6 +53,7 @@ void setup() {
 }
 void loop() {
   try {
+    judgeInput.update();
     manager.update();
     manager.draw();
   } catch (const char* e) {
