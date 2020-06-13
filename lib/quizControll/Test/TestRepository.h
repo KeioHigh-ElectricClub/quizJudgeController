@@ -17,7 +17,7 @@ class TestRepository : public IResultRepository {
     return true;
   }
 
-  bool store(std::unique_ptr<Recode> result) override {
+  bool store(RecodePtr result) override {
     Data received;
     received.respondent = result->getRespondentNum();
     received.isCorrect = result->getErratum() == Erratum::CORRECT;

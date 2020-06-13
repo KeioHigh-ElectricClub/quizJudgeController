@@ -7,16 +7,18 @@
 #include "TFT_eSPI.h"
 #include "Test/TestJudgeInput.h"
 #include "Test/TestJudgeOutput.h"
-#include "Test/TestRepository.h"
+// #include "Test/TestRepository.h"
 #include "UI/PageFactory.h"
 #include "UI/PageManager.h"
 #include "UI/PartsFactory.h"
 #include "infrastructure/Button/ButtonInput.h"
+#include "infrastructure/SD/SdRepository.h"
 #include "infrastructure/Sound/Sound.h"
 
 TFT_eSPI display(240, 320);
 
-TestRepository repository;
+// TestRepository repository;
+SdRepository repository(5, 25, 33);
 TestJudgeOutput judgeOutput;
 RecodeApplicationService recodeService(judgeOutput, repository);
 Config config(judgeOutput);

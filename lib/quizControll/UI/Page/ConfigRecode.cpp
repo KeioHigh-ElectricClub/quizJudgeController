@@ -19,9 +19,9 @@ ConfigRecode::ConfigRecode(TFT_eSPI* display, IPageChange* changer,
 }
 
 void ConfigRecode::init() {
+  positionIndex = !recodeApp->getCanRecoding();
   ConfigPage::init();
   drawTitle("記録");
-  positionIndex = !recodeApp->getCanRecoding();
 }
 void ConfigRecode::update() { ConfigPage::update(); }
 void ConfigRecode::draw() { ConfigPage::draw(); }

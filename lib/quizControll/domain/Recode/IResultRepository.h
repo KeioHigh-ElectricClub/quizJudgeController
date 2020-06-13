@@ -4,12 +4,13 @@
 
 #include "Result.h"
 
+using RecodePtr = std::unique_ptr<Recode>;
+
 class IResultRepository {
  public:
-  IResultRepository() {}
   virtual ~IResultRepository() {}
 
-  virtual bool store(std::unique_ptr<Recode> result);
-  virtual bool storeResetRecode();
-  virtual bool init();
+  virtual bool store(RecodePtr result) = 0;
+  virtual bool storeResetRecode() = 0;
+  virtual bool init() = 0;
 };

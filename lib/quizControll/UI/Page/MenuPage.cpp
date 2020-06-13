@@ -97,7 +97,7 @@ void MenuPage::draw() {
   if (!mustUpdate) return;
 
   display->loadFont("YuGothic20");
-
+  display->fillRect(0, 37, 320, 163, TFT_WHITE);
   for (int i = 0; i < 2; i++) {
     if (items[pageIndex][i].name == ignoreItem) continue;
 

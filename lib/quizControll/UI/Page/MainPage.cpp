@@ -37,7 +37,7 @@ void MainPage::init() {
   unsigned long timer = micros();
   draw();
 
-  Serial.println(micros() - timer);
+  // Serial.println(micros() - timer);
 }
 void MainPage::update() {
   button->update();
@@ -54,7 +54,7 @@ void MainPage::update() {
     recodeApp->showCorrect();
     soundPlay(Sound::CORRECT);
   }
-  Serial.println("main update");
+  // Serial.println("main update");
 }
 void MainPage::draw() {
   if (!mustUpdate) return;
