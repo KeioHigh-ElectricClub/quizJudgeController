@@ -6,18 +6,26 @@ JudgeInput::JudgeInput(byte sda, byte scl, RecodeApplicationService& recodeApp)
 }
 void JudgeInput::begin() {
   send(0x1A);
-  delay(50);
+  delay(1200);
   send(0x46);
+  Serial.println("i2c init");
 }
 void JudgeInput::update() {
   byte data = receive(0x52);
-  if (data & 0x00000001) {
+  // Serial.printf("judge status->%x\n", data);
+  if (data & 0b00000001) {
     soundPlay(Sound::PUSH);
   }
-  if (!(data & 0x00000010)) return;
-  byte respondent = receive(0xAA);
-  byte waiting = (data & 0x11111100) >> 2;
-  recodeApp.createAnswerRight(respondent, waiting);
+  if (data & 0b00000010) {
+    byte respondent = receive(0x54);
+    Serial.printf("respondent->%d\n", respondent);
+    recodeApp.createAnswerRight(respondent);
+  }
+  if (data & 0b0100) {
+    byte waiting = receive(0x56);
+    recodeApp.setWaiting(waiting);
+    Serial.printf("waiting->%d\n", waiting);
+  }
 }
 
 bool JudgeInput::send(byte select) {

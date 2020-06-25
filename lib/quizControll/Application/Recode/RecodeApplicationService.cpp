@@ -4,10 +4,11 @@ RecodeApplicationService::RecodeApplicationService(
     IControllJudgeOutput& controller, IResultRepository& resultRepository)
     : resultRepository(resultRepository), controller(controller) {}
 
-void RecodeApplicationService::createAnswerRight(byte respondentNum,
-                                                 byte waiting) {
+void RecodeApplicationService::createAnswerRight(byte respondentNum) {
   // if (nowRight != nullptr) return;
   nowRight = std::unique_ptr<AnswerRight>(new AnswerRight(respondentNum));
+}
+void RecodeApplicationService::setWaiting(byte waiting) {
   this->waiting = waiting;
 }
 void RecodeApplicationService::showCorrect() {
@@ -16,10 +17,7 @@ void RecodeApplicationService::showCorrect() {
 }
 void RecodeApplicationService::showIncorrect() {
   setErratum(Erratum::INCORRECT);
-  if (waiting <= 1)
-    controller.softReset();
-  else
-    controller.assignRight();
+  controller.assignRight();
 }
 void RecodeApplicationService::reset() {
   controller.softReset();

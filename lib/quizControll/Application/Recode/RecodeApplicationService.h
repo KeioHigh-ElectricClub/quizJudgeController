@@ -17,7 +17,8 @@ class RecodeApplicationService {
                            IResultRepository& _resultRepository);
   ~RecodeApplicationService() {}
 
-  void createAnswerRight(byte respondentNum, byte waiting);
+  void createAnswerRight(byte respondentNum);
+  void setWaiting(byte waiting);
   void showCorrect();
   void showIncorrect();
   void reset();
