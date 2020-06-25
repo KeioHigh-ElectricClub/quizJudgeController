@@ -3,7 +3,7 @@
 #include <Arduino.h>
 #include <SPIFFS.h>
 //
-#include <AudioFileSourceSPIFFS.h>
+#include <AudioFileSourcePROGMEM.h>
 #include <AudioGeneratorMP3.h>
 #include <AudioOutputI2S.h>
 #include <FreeRTOS.h>

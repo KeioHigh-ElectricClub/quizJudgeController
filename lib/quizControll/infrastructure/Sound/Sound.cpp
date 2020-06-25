@@ -5,16 +5,26 @@ QueueHandle_t queueHandle;
 AudioGeneratorMP3* mp3;
 AudioOutputI2S* i2s;
 
-AudioFileSourceSPIFFS* soundFiles[3];
+AudioFileSourcePROGMEM* sound;
+
+struct AudioFile {
+  char* data;
+  size_t size;
+};
 
 void task0(void* d) {
-  soundFiles[static_cast<int>(Sound::CORRECT)] =
-      new AudioFileSourceSPIFFS("/correct.mp3");
-  soundFiles[static_cast<int>(Sound::INCORRECT)] =
-      new AudioFileSourceSPIFFS("/incorrect.mp3");
-  soundFiles[static_cast<int>(Sound::PUSH)] =
-      new AudioFileSourceSPIFFS("/push.mp3");
-  i2s = new AudioOutputI2S(0, 2);
+  String fileNames[] = {"/correct.mp3", "/incorrect.mp3", "/push.mp3"};
+  AudioFile files[3];
+
+  for (byte i = 0; i < 3; i++) {
+    auto file = SPIFFS.open(fileNames[i]);
+    files[i].data = new char[file.size()];
+    file.readBytes(files[i].data, file.size());
+    files[i].size = file.size();
+    file.close();
+  }
+
+  i2s = new AudioOutputI2S(0, 1);
   mp3 = new AudioGeneratorMP3();
 
   Serial.println("music start");
@@ -24,11 +34,16 @@ void task0(void* d) {
     auto status = xQueueReceive(queueHandle, &next, 0);
     if (status == pdPASS) {
       if (mp3->isRunning()) mp3->stop();
-      mp3->begin(soundFiles[static_cast<int>(next)], i2s);
+      delete sound;
+      AudioFile file = files[static_cast<int>(next)];
+      sound = new AudioFileSourcePROGMEM(file.data, file.size);
+      mp3->begin(sound, i2s);
       Serial.printf("play %d\n", static_cast<int>(next));
     }
     if (mp3->isRunning()) {
-      if (!mp3->loop()) mp3->stop();
+      if (!mp3->loop()) {
+        mp3->stop();
+      }
     }
     vTaskDelay(1);
   }
