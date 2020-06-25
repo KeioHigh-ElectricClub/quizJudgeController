@@ -9,6 +9,7 @@
 class JudgeOutput : public IConfigOutput, public IControllJudgeOutput {
  public:
   JudgeOutput(byte sda, byte scl);
+  ~JudgeOutput() {}
 
   bool setLimit(Limit limit);
   bool assignRight();

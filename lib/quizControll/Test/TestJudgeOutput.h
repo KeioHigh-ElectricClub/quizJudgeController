@@ -8,9 +8,7 @@
 
 class TestJudgeOutput : public IConfigOutput, public IControllJudgeOutput {
  public:
-  TestJudgeOutput() {}
   ~TestJudgeOutput() {}
-
   bool softReset() {
     Serial.println("Soft Reset");
     return true;

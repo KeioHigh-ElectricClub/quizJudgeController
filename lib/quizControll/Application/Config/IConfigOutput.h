@@ -4,8 +4,7 @@
 
 class IConfigOutput {
  public:
-  IConfigOutput() {}
-  virtual ~IConfigOutput() {}
+  virtual ~IConfigOutput(){};
 
-  virtual bool setLimit(Limit limit);
+  virtual bool setLimit(Limit limit) = 0;
 };

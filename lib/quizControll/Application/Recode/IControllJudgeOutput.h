@@ -2,9 +2,8 @@
 
 class IControllJudgeOutput {
  public:
-  IControllJudgeOutput() {}
-  virtual ~IControllJudgeOutput() {}
+  virtual ~IControllJudgeOutput(){};
 
-  virtual bool softReset();
-  virtual bool assignRight();
+  virtual bool softReset() = 0;
+  virtual bool assignRight() = 0;
 };
