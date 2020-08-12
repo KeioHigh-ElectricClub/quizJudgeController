@@ -3,7 +3,8 @@
 QueueHandle_t queueHandle;
 
 AudioGeneratorMP3* mp3;
-AudioOutputI2S* i2s;
+AudioOutputDeltaSigmaDAC* i2s;
+#include "driver/i2s.h"
 
 AudioFileSourcePROGMEM* sound;
 
@@ -24,7 +25,7 @@ void task0(void* d) {
     file.close();
   }
 
-  i2s = new AudioOutputI2S(0, 1);
+  i2s = new AudioOutputDeltaSigmaDAC;
   mp3 = new AudioGeneratorMP3();
 
   Serial.println("music start");
@@ -42,6 +43,7 @@ void task0(void* d) {
     }
     if (mp3->isRunning()) {
       if (!mp3->loop()) {
+        // i2s_zero_dma_buffer(I2S_NUM_0);
         mp3->stop();
       }
     }
