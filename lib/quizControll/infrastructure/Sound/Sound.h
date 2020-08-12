@@ -1,12 +1,12 @@
 #pragma once
 
 #include <Arduino.h>
+#include <FreeRTOS.h>
 #include <SPIFFS.h>
 //
 #include <AudioFileSourcePROGMEM.h>
 #include <AudioGeneratorMP3.h>
-#include <AudioOutputI2S.h>
-#include <FreeRTOS.h>
+#include <AudioOutputDeltaSigmaDAC.h>
 
 extern QueueHandle_t queueHandle;
 
