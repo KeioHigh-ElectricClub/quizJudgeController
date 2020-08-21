@@ -49,8 +49,8 @@ void MenuPage::update() {
     mustUpdate = true;
     return;
   }
-  Serial.println("menu update end");
-  Serial.printf("position: %d, page: %d\n", positionIndex, pageIndex);
+  // Serial.println("menu update end");
+  // Serial.printf("position: %d, page: %d\n", positionIndex, pageIndex);
 }
 
 void MenuPage::onLeftPushed() {

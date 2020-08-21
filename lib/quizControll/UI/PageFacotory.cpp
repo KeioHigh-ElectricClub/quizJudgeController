@@ -16,6 +16,7 @@ std::unique_ptr<IPage> PageFactory::create(PageList page,
           new MainPage(display, changer, button, recodeApp));
       break;
     case PageList::Menu:
+      Serial.println("created Menu Page");
       return std::unique_ptr<IPage>(new MenuPage(display, changer, button));
       break;
     case PageList::ConfigLimit:

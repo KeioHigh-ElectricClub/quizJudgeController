@@ -37,7 +37,7 @@ void ConfigPage::update() {
     }
     positionIndex++;
   }
-  Serial.printf("position: %d\n", positionIndex);
+  // Serial.printf("position: %d\n", positionIndex);
 }
 
 void ConfigPage::draw() {
