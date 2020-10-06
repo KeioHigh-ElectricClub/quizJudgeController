@@ -65,7 +65,7 @@ void loop() {
     Serial.println("exception");
     Serial.println(e);
   }
-  delay(50);
+  delay(40);
 }
 
 #endif
