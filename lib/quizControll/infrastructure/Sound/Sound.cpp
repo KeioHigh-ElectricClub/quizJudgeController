@@ -36,8 +36,8 @@ void task0(void* d) {
     if (status == pdPASS) {
       if (mp3->isRunning()) mp3->stop();
       delete sound;
-      AudioFile file = files[static_cast<int>(next)];
-      sound = new AudioFileSourcePROGMEM(file.data, file.size);
+      AudioFile* file = &files[static_cast<int>(next)];
+      sound = new AudioFileSourcePROGMEM(file->data, file->size);
       mp3->begin(sound, i2s);
       Serial.printf("play %d\n", static_cast<int>(next));
     }
